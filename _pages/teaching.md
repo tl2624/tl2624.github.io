@@ -8,7 +8,7 @@ author_profile: true
 ## Marxe School of Public and International Affairs, Baruch College, CUNY
 
 - **Advanced Quantitative Methods.** F24, S25.
-- [Syllabus](https://tl2624.github.io/files/PAF_9177.pdf)
+  [Syllabus](https://tl2624.github.io/files/PAF_9177.pdf)
 
 - **Causal Analysis and Inference.** S24, F24, S25.  
   [Syllabus](https://tl2624.github.io/files/PAF_9272.pdf)
