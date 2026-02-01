@@ -23,7 +23,7 @@ Leavitt, T. and V. Rivera-Burgos. (In press). Navigating the Mismeasurement of I
 **Paper**: [PDF](https://tl2624.github.io/files/Leavitt_Rivera-Burgos_First_View.pdf) · **Replication material**: [Dataverse](https://doi.org/10.7910/DVN/X3CORT) | [GitHub]([https://github.com/tl2624/audit-symmetry-replication](https://github.com/tl2624/message-based-experiments))
 
 Leavitt, T. and L. W. Miratrix. Building a Design-Based Matching Pipeline: From Principles to Practical Implementation in R. Accepted at *Observational Studies*.  
-**Paper**: [PDF](https://tl2624.github.io/files/Leavitt_Miratrix_Accepted.pdf) · **Replication material**: [GitHub](https://github.com/tl2624/matching-guide)
+**Preprint**: [PDF](https://tl2624.github.io/files/Leavitt_Miratrix_Accepted.pdf) · **Replication material**: [GitHub](https://github.com/tl2624/matching-guide)
 
 ## Under Review
 
