@@ -2,7 +2,7 @@
 
 This repository contains the source code for my personal academic website:
 
-👉 https://tl2624.github.io
+👉 https://tomleavitt.com
 
 The site is built using Jekyll and the Academic Pages template (a fork of Minimal Mistakes) and is hosted via GitHub Pages.
 
