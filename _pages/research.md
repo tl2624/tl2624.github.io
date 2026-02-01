@@ -5,7 +5,7 @@ permalink: /research/
 author_profile: true
 ---
 
-## Published and Forthcoming Papers
+## Published and Accepted Papers
 
 Leavitt, T. (2023). Randomization-Based, Bayesian Inference of Causal Effects. *Journal of Causal Inference*, 11(1), 20220025. [DOI: 10.1515/jci-2022-0025](https://doi.org/10.1515/jci-2022-0025)  
 **Paper**: [PDF](https://tl2624.github.io/files/Leavitt_2023.pdf) · **Replication material**: [GitHub](https://github.com/tl2624/bayesian-randomization-replication)
