@@ -20,14 +20,13 @@ author_profile: true
 ## The City College of New York (CCNY), CUNY
 
 - **Political Systems of Africa.** S18.  
-  [Download Syllabus](https://tl2624.github.io/files/PAF_9177.pdf)
+  [Download Syllabus](https://tl2624.github.io/files/PSC_2380.pdf)
 
 ---
 
 ## ICPSR Summer Program — University of Michigan
 
 - **Causal Inference for the Social Sciences.** Su18-Su24, Su26.  
-  [Download Syllabus](/files/icpsr-causal-inference.pdf)
 
 ---
 
