@@ -10,7 +10,7 @@ author_profile: true
 - **Advanced Quantitative Methods.** F24, S25.
   [Syllabus](https://tl2624.github.io/files/PAF_9177.pdf)
 
-- **Causal Analysis and Inference.** S24, F24, S25.  
+- **Causal Analysis and Inference.** S24, F24, S25.
   [Syllabus](https://tl2624.github.io/files/PAF_9272.pdf)
 
 - **Data Analysis for Public Service.** F23, S24.
@@ -19,7 +19,7 @@ author_profile: true
 
 ## The City College of New York (CCNY), CUNY
 
-- **Political Systems of Africa.** S18.  
+- **Political Systems of Africa.** S18.
   [Syllabus](https://tl2624.github.io/files/PSC_2380.pdf)
 
 ---
