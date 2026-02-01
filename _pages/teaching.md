@@ -7,11 +7,11 @@ author_profile: true
 
 ## Marxe School of Public and International Affairs, Baruch College, CUNY
 
-- **Advanced Quantitative Methods.** F24, S25.  
-  [Download Syllabus](https://tl2624.github.io/files/PAF_9177.pdf)
+- **Advanced Quantitative Methods.** F24, S25.
+- [Syllabus](https://tl2624.github.io/files/PAF_9177.pdf)
 
 - **Causal Analysis and Inference.** S24, F24, S25.  
-  [Download Syllabus](https://tl2624.github.io/files/PAF_9272.pdf)
+  [Syllabus](https://tl2624.github.io/files/PAF_9272.pdf)
 
 - **Data Analysis for Public Service.** F23, S24.
 
@@ -20,7 +20,7 @@ author_profile: true
 ## The City College of New York (CCNY), CUNY
 
 - **Political Systems of Africa.** S18.  
-  [Download Syllabus](https://tl2624.github.io/files/PSC_2380.pdf)
+  [Syllabus](https://tl2624.github.io/files/PSC_2380.pdf)
 
 ---
 
