@@ -5,8 +5,6 @@ permalink: /methods-guides/
 author_profile: true
 ---
 
-## Methods guides
-
 - **Difference-in-Differences website** (with Bret Zeldow and Laura Hatfield).  
   - [Difference-in-Differences](https://diff.healthpolicydatascience.org/)
 
