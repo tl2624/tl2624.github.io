@@ -30,3 +30,11 @@ Leavitt, T. and L. W. Miratrix. Building a Design-Based Matching Pipeline: From 
 Leavitt, T. Beyond Pre-Trends: A Discordance-Based Sensitivity Analysis for Difference-in-Differences. *Minor revisions*.
 
 Leavitt, T., J. Bowers, and L. W. Miratrix. Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force. *Revise and resubmit*.
+
+## Book Chapters
+
+Bowers, J. and T. Leavitt (2020). Causality and design-based inference. In L. Curini and R. Franzese (Eds.), The SAGE Handbook of Research Methods in Political Science and International Relations, Volume 2, Chapter 41, pp. 769-804. Thousand Oaks, CA: SAGE Publications. [DOI: 10.4135/9781526486387.n44](https://doi.org/10.4135/9781526486387.n44)  
+[**Download preprint**](https://tl2624.github.io/files/Bowers_Leavitt_2020.pdf)
+
+Green, D. P., T. Leavitt, and D. Markovits (In Press). Challenges that Proprietary Research Poses for Meta-analysis. In J. M. Box-Steffensmeier, D. P. Christenson, and V. Sinclair-Chapman (Eds.), Oxford Handbook of Engaged Methodological Pluralism in Political Science, Volume 1. New York, NY: Oxford University Press. [DOI: 10.1093/oxfordhb/9780192868282.013.21](https://doi.org/10.1093/oxfordhb/9780192868282.013.21)  
+[**Download preprint**](https://tl2624.github.io/files/Green_et_al_In_Progress.pdf)
