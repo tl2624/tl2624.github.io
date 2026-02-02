@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Methods Guides"
+title: ""
 permalink: /methods-guides/
 author_profile: true
 ---
