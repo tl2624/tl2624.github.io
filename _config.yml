@@ -28,7 +28,7 @@ author:
   pronouns         : # example: "she/her"  
   bio              : "Assistant Professor"
   location         : "New York, NY"
-  employer         : '<a href="https://www.cuny.edu" target="_blank">City University of New York</a>'
+  employer         : "City University of New York"
   uri              : # URL
   email            : "thomas.leavitt@baruch.cuny.edu" 
 
