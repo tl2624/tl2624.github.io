@@ -1,0 +1,29 @@
+/* Disable greedy-nav hamburger and hidden bucket */
+.greedy-nav__toggle {
+  display: none !important;
+}
+
+.greedy-nav .hidden-links {
+  display: none !important;
+}
+
+/* Mobile-friendly horizontal scrolling nav */
+@media (max-width: 900px) {
+  .greedy-nav .visible-links {
+    display: flex;
+    flex-wrap: nowrap;              /* stay on ONE line */
+    overflow-x: auto;               /* allow horizontal scroll */
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .greedy-nav .visible-links > li {
+    flex: 0 0 auto;
+    margin-right: 1rem;
+  }
+
+  /* Optional: hide scrollbar but keep scrolling */
+  .greedy-nav .visible-links::-webkit-scrollbar {
+    display: none;
+  }
+}
