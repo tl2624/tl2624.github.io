@@ -25,7 +25,8 @@ Leavitt, T. and V. Rivera-Burgos. (In press). Navigating the Mismeasurement of I
 Leavitt, T. and L. W. Miratrix. Building a Design-Based Matching Pipeline: From Principles to Practical Implementation in R. Accepted at *Observational Studies*.  
 **Preprint**: [PDF](https://tl2624.github.io/files/Leavitt_Miratrix_Accepted.pdf) · **Replication material**: [GitHub](https://github.com/tl2624/matching-guide)
 
-Leavitt, T. Beyond Pre-Trends: A Discordance-Based Sensitivity Analysis for Difference-in-Differences. Conditionally accepted at *Observational Studies*.
+Leavitt, T. Beyond Pre-Trends: A Discordance-Based Sensitivity Analysis for Difference-in-Differences. Accepted at *Observational Studies*.
+**Preprint**: [PDF](https://tl2624.github.io/files/Leavitt_Accepted.pdf)
 
 ## Under Review
 
