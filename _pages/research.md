@@ -17,7 +17,7 @@ Leavitt, T. and L. A. Hatfield. (2025). Averaged Prediction Models (APM): Identi
 **Paper**: [PDF](https://tl2624.github.io/files/Leavitt_Hatfield_2025.pdf) · **Replication material**: [GitHub](https://github.com/tl2624/apm-replication) · **R package (apm)**: [CRAN](https://cran.r-project.org/web/packages/apm/index.html) | [GitHub](https://tl2624.github.io/apm/)
 
 Leavitt, T. (2026). Fisher Meets Bayes: The Value of Randomisation for Bayesian Inference of Causal Effects. *International Statistical Review*, 94(1), 188-201. [DOI: 10.1111/insr.12598](https://doi.org/10.1111/insr.12598)  
-**Paper**: [PDF](https://tl2624.github.io/files/Leavitt_Early_View.pdf) · **Replication material**: [GitHub](https://github.com/tl2624/fisher-meets-bayes-replication)
+**Paper**: [PDF](https://tl2624.github.io/files/Leavitt_2026.pdf) · **Replication material**: [GitHub](https://github.com/tl2624/fisher-meets-bayes-replication)
 
 Leavitt, T. and V. Rivera-Burgos. (In press). Navigating the Mismeasurement of Intermediary Variables in Message-Based Experiments. *Political Science Research and Methods*, First View. [DOI: 10.1017/psrm.2025.10082](https://doi.org/10.1017/psrm.2025.10082)  
 **Paper**: [PDF](https://tl2624.github.io/files/Leavitt_Rivera-Burgos_First_View.pdf) · **Replication material**: [Dataverse](https://doi.org/10.7910/DVN/X3CORT) | [GitHub](https://github.com/tl2624/message-based-experiments)
