@@ -16,7 +16,7 @@ Leavitt, T. and V. Rivera-Burgos (2024). Audit Experiments of Racial Discriminat
 Leavitt, T. and L. A. Hatfield. (2025). Averaged Prediction Models (APM): Identifying Causal Effects in Controlled Pre-Post Settings with Application to Gun Policy. *The Annals of Applied Statistics*, 19(3), 1826-1846. [DOI: 10.1214/25-AOAS2011](https://doi.org/10.1214/25-AOAS2011)  
 **Paper**: [PDF](https://tl2624.github.io/files/Leavitt_Hatfield_2025.pdf) · **Replication material**: [GitHub](https://github.com/tl2624/apm-replication) · **R package (apm)**: [CRAN](https://cran.r-project.org/web/packages/apm/index.html) | [GitHub](https://tl2624.github.io/apm/)
 
-Leavitt, T. (In press). Fisher Meets Bayes: The Value of Randomisation for Bayesian Inference of Causal Effects. *International Statistical Review*, Early View. [DOI: 10.1111/insr.12598](https://doi.org/10.1111/insr.12598)  
+Leavitt, T. (2026). Fisher Meets Bayes: The Value of Randomisation for Bayesian Inference of Causal Effects. *International Statistical Review*, 94(1), 188-201. [DOI: 10.1111/insr.12598](https://doi.org/10.1111/insr.12598)  
 **Paper**: [PDF](https://tl2624.github.io/files/Leavitt_Early_View.pdf) · **Replication material**: [GitHub](https://github.com/tl2624/fisher-meets-bayes-replication)
 
 Leavitt, T. and V. Rivera-Burgos. (In press). Navigating the Mismeasurement of Intermediary Variables in Message-Based Experiments. *Political Science Research and Methods*, First View. [DOI: 10.1017/psrm.2025.10082](https://doi.org/10.1017/psrm.2025.10082)  
