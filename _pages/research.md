@@ -32,7 +32,7 @@ Leavitt, T. Beyond Pre-Trends: A Discordance-Based Sensitivity Analysis for Diff
 
 Leavitt, T., J. Bowers, and L. W. Miratrix. Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force. Revise and resubmit at *Journal of the American Statistical Associaton*. [DOI: 10.48550/arXiv.2605.21893](
 https://doi.org/10.48550/arXiv.2605.21893)
-**ArXiv Preprint**: [PDF]([https://tl2624.github.io/files/Leavitt_et_al_2026.pdf]
+**ArXiv Preprint**: [PDF](https://tl2624.github.io/files/Leavitt_et_al_2026.pdf)
 
 ## Book Chapters
 
