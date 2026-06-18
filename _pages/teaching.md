@@ -27,7 +27,7 @@ author_profile: true
 ## ICPSR Summer Program — University of Michigan
 
 - **Causal Inference for the Social Sciences.** Su18-Su24, Su26.
-  [Syllabus](https://tl2624.github.io/files/ICPSR_Causal_Inference_Syllabus.pdf)  
+  [Syllabus](https://tl2624.github.io/files/ICPSR_Causal_Inference.pdf)  
 
 ---
 
