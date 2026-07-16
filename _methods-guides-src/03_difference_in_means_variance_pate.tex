@@ -1,0 +1,366 @@
+\RequirePackage[l2tabu, orthodox]{nag} % warn about outdated packages
+\documentclass[12pt,leqno]{article}
+\usepackage{microtype} %
+\usepackage{setspace}
+\onehalfspacing
+% Let TeX loosen interword spacing rather than overflow the margin when a long
+% unbreakable math atom lands awkwardly.
+\emergencystretch=3em
+\usepackage{xcolor, color, ucs}     % http://ctan.org/pkg/xcolor
+\usepackage{natbib}
+\usepackage{booktabs}          % package for thick lines in tables
+\usepackage{amsfonts,amsthm,amsmath,amssymb}          % AMS Stuff
+\usepackage{empheq}            % To use left brace on {align} environment
+\usepackage{graphicx}          % Insert .pdf, .eps or .png
+\usepackage{enumitem}          % http://ctan.org/pkg/enumitem
+\usepackage[mathscr]{euscript}          % Font for right expectation sign
+\usepackage{tabularx}          % Get scale boxes for tables
+\usepackage{float}             % Force floats around
+\usepackage{afterpage}% http://ctan.org/pkg/afterpage
+\usepackage[T1]{fontenc}
+\usepackage{rotating}          % Rotate long tables horizontally
+\usepackage{bbm}                % for bold betas
+\usepackage{bm} 
+\usepackage{csquotes}           % \enquote{} and \textquote[][]{} environments
+\usepackage{subfig}
+\usepackage{lscape}
+\usepackage{titling}            % modify maketitle in latex
+% \usepackage{mathtools}          % multlined environment with size option
+\usepackage{verbatim}
+\usepackage{geometry}
+\usepackage{bigfoot}
+\usepackage[format=hang,
+            font={small},
+            labelfont=bf,
+            textfont=rm]{caption}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\geometry{verbose,margin=2cm,nomarginpar}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+\usepackage{url}
+\usepackage{relsize}            % \mathlarger{} environment
+
+% COLOR FOR LINKS (defined here because hyperref reads it as an option below)
+\definecolor{linknavy}{RGB}{31,78,121}
+
+\usepackage[unicode=true,
+            pdfusetitle,
+            bookmarks=true,
+            bookmarksnumbered=true,
+            bookmarksopen=true,
+            bookmarksopenlevel=2,
+            breaklinks=false,
+            pdfborder={0 0 1},
+            backref=page,
+            colorlinks=true,
+            hyperfootnotes=true,
+            hypertexnames=false,
+            pdfstartview={XYZ null null 1},
+            citecolor=linknavy,
+            linkcolor=linknavy,
+            urlcolor=linknavy]{hyperref}
+\usepackage{hypernat}
+
+\usepackage{multirow}
+\usepackage{titlesec}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\bfseries}
+\usepackage[noabbrev]{cleveref} % Should be loaded after \usepackage{hyperref}
+
+\parskip=12pt
+\parindent=0pt
+\delimitershortfall=-1pt
+\interfootnotelinepenalty=100000
+
+\makeatletter
+\def\thm@space@setup{\thm@preskip=0pt
+\thm@postskip=0pt}
+\makeatother
+
+\allowdisplaybreaks
+\newtheoremstyle{newstyle}
+{12pt} %Aboveskip
+{12pt} %Below skip
+{\itshape} %Body font e.g.\mdseries,\bfseries,\scshape,\itshape
+{} %Indent
+{\bfseries} %Head font e.g.\bfseries,\scshape,\itshape
+{.} %Punctuation afer theorem header
+{ } %Space after theorem header
+{} %Heading
+
+\theoremstyle{newstyle}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defin}[thm]{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newcommand{\given}[1][]{\:#1\vert\:}
+\DeclareMathOperator{\E}{\mathrm{E}}
+\DeclareMathOperator{\Var}{\mathrm{Var}}
+\DeclareMathOperator{\Cov}{\mathrm{Cov}}
+\newcommand{\R}{\mathbb{R}}              % ordinary symbol, not an operator
+
+% ---------- sources of randomness ----------
+\newcommand{\bZ}{\bm{Z}}   \newcommand{\bz}{\bm{z}}   % assignment: random / realized
+\newcommand{\bR}{\bm{R}}   \newcommand{\br}{\bm{r}}   % sampling:   random / realized
+\newcommand{\EZ}{\E_{\Omega}}    \newcommand{\VarZ}{\Var_{\Omega}}  % over assignment
+\newcommand{\ER}{\E_{\Pi}}       \newcommand{\VarR}{\Var_{\Pi}}     % over sampling
+
+% ---------- potential outcomes (function form) ----------
+\newcommand{\po}[2]{y_{#1}(#2)}     % \po{i}{1} -> y_i(1); \po{i}{\bZ} -> y_i(Z)
+\newcommand{\pov}[1]{\bm{y}(#1)}    % \pov{1}   -> bold y(1)
+\newcommand{\ybar}[1]{\bar{y}(#1)}  % \ybar{1}  -> sample mean of y_i(1)
+
+% ---------- estimands and estimator ----------
+\newcommand{\tauS}{\tau_{\text{SATE}}}
+\newcommand{\tauP}{\tau_{\text{PATE}}}
+\newcommand{\tauhat}{\hat{\tau}}
+
+% ---------- variance families: letter = divisor family, subscript = index set ----------
+\newcommand{\Ssq}[2][n]{S_{#1}^{2}(#2)}
+\newcommand{\ssq}[2][n]{\sigma_{#1}^{2}(#2)}
+\newcommand{\scov}[2][n]{\sigma_{#1}(#2)}
+\newcommand{\Ssqhat}[2][n]{\widehat{S}_{#1}^{2}(#2)}
+\newcommand{\ssqhat}[2][n]{\widehat{\sigma}_{#1}^{2}(#2)}
+\newcommand{\Varhat}{\widehat{\Var}}
+
+% ---------- misc ----------
+\newcommand{\ind}[1]{\mathbbm{1}\left[#1\right]}
+
+
+% \Pr is a limits-taking operator by default, so a subscript like \Pr_{\Omega}
+% lands fully beneath Pr in display style; redefine it so the distribution
+% subscript sits beside the operator, matching \E and \Var.
+\renewcommand{\Pr}{\operatorname{Pr}}
+
+% COLORS FOR EQUATIONS (3-class Dark2, colorblind-safe)
+\definecolor{eqgreen}{RGB}{27,158,119}
+\definecolor{eqblue}{RGB}{117,112,179}
+\definecolor{eqred}{RGB}{217,95,2}
+
+\begin{document}
+
+\title{Variance of the Difference-in-Means Estimator for the PATE and Estimation of That Variance\thanks{This is a live document that is subject to updating at any time.}}
+\author{Thomas Leavitt}
+\date{}
+\maketitle
+
+This guide extends the finite sample results to a superpopulation. It derives the variance of the Difference-in-Means estimator for the Population Average Treatment Effect (PATE) and then shows that the \textit{same} variance estimator that is merely \textit{conservative} for the Sample Average Treatment Effect (SATE) is \textit{exactly unbiased} for the PATE. The guide is self-contained, but it builds directly on the companion guides \enquote{Notation and Setup for Design-Based Causal Inference} and \enquote{Variance of the Difference-in-Means Estimator for the SATE and Estimation of That Variance,} whose key results we recall as needed.
+
+\section{Setup}
+
+Thus far (in the companion SATE guides) we have considered estimation in only a finite sample. Now consider a superpopulation, $\mathcal{P}_N$, of size $N \geq n \geq 4$, and let the index $i \in \{1, \ldots , N\}$ run over the $N$ units in $\mathcal{P}_N$. Let $n$ units from $\mathcal{P}_N$ be randomly selected into an experimental sample, $\mathcal{S}_n$, by simple random sampling, while the remaining $N - n$ units in $\mathcal{P}_N$ are unsampled. Of these $n$ sampled units, $n_T \geq 2$ are randomly assigned to treatment and $n - n_T = n_C \geq 2$ are randomly assigned to control by complete random assignment; the setup guide explains why each arm needs at least two units (each arm's sample variance in the variance estimator must be well defined). As in the finite sample setting, each unit $i$ has two \textit{fixed} potential outcomes, $\po{i}{1}$ and $\po{i}{0}$, with individual effect $\tau_i \coloneqq \po{i}{1} - \po{i}{0}$, and the observed outcome is $Y_i \coloneqq \po{i}{Z_i} = Z_i \po{i}{1} + (1 - Z_i)\po{i}{0}$.
+
+The binary indicator variable $R_i \in \{0, 1\}$ denotes whether unit $i$ is included $(R_i = 1)$ or excluded $(R_i = 0)$ in the random sample from the superpopulation $\mathcal{P}_N$. Write $n(\br) \coloneqq \sum_{i = 1}^N r_i$ for the number of units a sampling vector selects. The support of $\bR = \begin{bmatrix} R_1, \dots , R_N\end{bmatrix}^\top$ is then $\Pi = \{\br \in \{0,1\}^N: n(\br) = n\}$, the same level set construction that defines $\Omega$ in the assignment stage: Simple random sampling fixes $n(\bR) = n$ with probability one, just as complete random assignment fixes $n_T(\bZ) = n_T$, so both counts appear below as the plain constants $n$ and $n_T$.
+
+The target of interest is the Population Average Treatment Effect (PATE), $\tauP \coloneqq N^{-1} \sum_{i = 1}^N \tau_i$. Define the Difference-in-Means estimator of $\tauP$ as
+\begin{equation}
+\label{eq: diff means est I PATE}
+\tauhat \coloneqq \dfrac{1}{n_T} \sum \limits_{i = 1}^N R_i Z_i Y_i - \dfrac{1}{n_C} \sum \limits_{i = 1}^N R_i \left(1 - Z_i\right) Y_i.
+\end{equation}
+Here the product $R_i Z_i$ equals $1$ only for units that are both sampled and assigned to treatment, and $R_i(1 - Z_i)$ equals $1$ only for units that are both sampled and assigned to control; unsampled units have $R_i = 0$ and so contribute nothing, regardless of $Z_i$. Otherwise the setup is identical to the finite sample setup, except that now, under simple random sampling of $n$ units from a population of size $N$ and complete random assignment with $n_T$ treated units out of $n$ sampled units, there are $\binom{N}{n} \binom{n}{n_T}$ possible joint configurations: the $\binom{n}{n_T}$ assignments for any single realized sample, times the $\binom{N}{n}$ samples that could be realized.
+
+The PATE estimator in \eqref{eq: diff means est I PATE} has \textit{two} sources of randomness, $\{R_i\}_{i = 1}^N$ and $\{Z_i\}_{i = 1}^n$, reflecting the random sampling process and the random assignment process. By contrast, the SATE estimator has only the single source $\{Z_i\}_{i = 1}^n$. For the overall expectation and variance of the PATE estimator we write $\E[\cdot]$ and $\Var[\cdot]$; we write $\EZ[\cdot], \VarZ[\cdot]$ for expectation and variance over the assignment process (conditional on the sample), and $\ER[\cdot], \VarR[\cdot]$ for those over the sampling process. By the law of total variance, the variance of the PATE estimator is
+\begin{equation}
+\label{eq: var diff means est PATE total var}
+\Var\left[\tauhat\right] = \ER\left[\VarZ\left[\tauhat\right]\right] + \VarR\left[\EZ\left[\tauhat\right]\right].
+\end{equation}
+
+We will also need two ingredients from the finite sample (SATE) analysis. First, conditional on the realized sample, the finite sample variances of the potential outcomes (computed over the $n$ sampled units, with divisor $n - 1$) are
+\begin{align}
+\Ssq{\pov{1}} = & \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)^2 \label{eq: fin sample var treated} \\
+\Ssq{\pov{0}} = & \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^n \left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right)^2 \label{eq: fin sample var control} \\
+\Ssq{\bm{\tau}} = & \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^n \left(\tau_{i} - \dfrac{1}{n} \sum \limits_{i = 1}^n \tau_i\right)^2. \label{eq: fin sample effects}
+\end{align}
+Second, as derived in the companion SATE variance guide, conditional on the realized sample the assignment variance of $\tauhat$ is
+\begin{equation}
+\label{eq: sate var recap}
+\VarZ\left[\tauhat\right] = \dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} - \dfrac{\Ssq{\bm{\tau}}}{n},
+\end{equation}
+and $\tauhat$ is unbiased for the (sample) SATE, $\EZ[\tauhat] = \tauS$; the proof of \Cref{prop: superpop var} makes precise how this fixed sample quantity becomes random once the sample itself is random.
+
+\section{Variance of the Difference-in-Means estimator for the PATE}
+
+\begin{prop} \label{prop: superpop var}
+The variance of $\tauhat$ for $\tauP$ under simple random sampling from the units in $\mathcal{P}_N$ and complete random assignment among the units in $\mathcal{S}_n$ is
+\small
+\begin{equation}
+\label{eq: diff means est PATE}
+\Var\left[\tauhat\right] = \dfrac{\Ssq[N]{\pov{1}}}{n_T} + \dfrac{\Ssq[N]{\pov{0}}}{n_C} - \dfrac{\Ssq[N]{\bm{\tau}}}{N},
+\end{equation}
+\normalsize
+where the population variances use the divisor $N - 1$, in keeping with the naming rule of the setup guide:
+\small
+\begin{align*}
+\Ssq[N]{\pov{1}} & = \left(\frac{1}{N - 1}\right)\sum \limits_{i = 1}^{N} \left(\po{i}{1} - \dfrac{1}{N} \sum \limits_{i = 1}^{N} \po{i}{1}\right)^2 \\
+\Ssq[N]{\pov{0}} & = \left(\frac{1}{N - 1}\right)\sum \limits_{i = 1}^{N} \left(\po{i}{0} - \dfrac{1}{N} \sum \limits_{i = 1}^{N} \po{i}{0}\right)^2 \\
+\Ssq[N]{\bm{\tau}} & = \left(\frac{1}{N - 1}\right) \sum \limits_{i = 1}^{N} \left(\po{i}{1} - \po{i}{0} - \dfrac{1}{N} \sum \limits_{i = 1}^{N} \tau_i\right)^2.
+\end{align*}
+\normalsize
+\end{prop}
+\begin{proof}
+By the law of total variance, \Cref{eq: var diff means est PATE total var}, the variance of the Difference-in-Means estimator of the PATE is
+\small
+\begin{align*}
+\Var\left[\tauhat\right] & = \ER\left[\VarZ\left[\tauhat\right]\right] + \VarR\left[\EZ\left[\tauhat\right]\right].
+\end{align*}
+\normalsize
+Since $\tauhat$ is unbiased for the SATE over $\Omega$, we have $\EZ[\tauhat] = \tauS(\bR)$. Here the notation must register a shift in what is random, and the shift deserves its own numbered steps.
+
+\textbf{Step 1 (finite population object).} In the SATE guides, $\tauS \coloneqq n^{-1}\sum_{i \in \mathcal{S}_n} \tau_i$ is a fixed number: The sample is given, and nothing about the sample is random.
+
+\textbf{Step 2 (new randomness enters).} In this guide the sampling stage determines which units compose $\mathcal{S}_n$, so the same average becomes a function of the sampling vector: $\tauS(\bR) \coloneqq \frac{1}{n}\sum_{i = 1}^N R_i \tau_i$ is a random variable, and $\VarR[\tauS(\bR)]$ is a meaningful, nonzero quantity.
+
+\textbf{Step 3 (conditioning recovers the fixed object).} Given $\bR = \br$, the value $\tauS(\br)$ is again a fixed number, and the finite population analysis applies verbatim within the realized sample.
+
+Having stated the promotion once, we display the argument wherever the randomness is the point, namely inside $\ER[\cdot]$ and $\VarR[\cdot]$. The variability of $\tauS(\bR)$ across samples is exactly the second component of the law of total variance, $\VarR[\EZ[\tauhat]] = \VarR[\tauS(\bR)]$. Using the assignment variance recalled in \eqref{eq: sate var recap}, it follows that
+\small
+\begin{align*}
+\Var\left[\tauhat\right] & = \ER\left[\VarZ\left[\tauhat\right]\right] + \VarR\left[\EZ\left[\tauhat\right]\right] \\
+& = \ER\left[\dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} - \dfrac{\Ssq{\bm{\tau}}}{n}\right] + \VarR\left[\tauS(\bR)\right].
+\end{align*}
+\normalsize
+Therefore, we need to derive $\ER[\frac{\Ssq{\pov{1}}}{n_T} + \frac{\Ssq{\pov{0}}}{n_C} - \frac{\Ssq{\bm{\tau}}}{n}]$ and $\VarR[\tauS(\bR)]$.
+
+Elementary theory from survey sampling \citep{cochran1977,lohr2010,kish1965} implies that
+\small
+\begin{equation*}
+\VarR\left[\tauS(\bR)\right] = \VarR\left[\dfrac{1}{n} \sum \limits_{i = 1}^N R_i \tau_i\right] = \dfrac{N - n}{N} \, \dfrac{\Ssq[N]{\bm{\tau}}}{n}.
+\end{equation*}
+\normalsize
+Now we only need to derive $\ER[\frac{\Ssq{\pov{1}}}{n_T} + \frac{\Ssq{\pov{0}}}{n_C} - \frac{\Ssq{\bm{\tau}}}{n}]$:
+\small
+\begin{align*}
+\ER\left[\dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} - \dfrac{\Ssq{\bm{\tau}}}{n}\right] & = \dfrac{1}{n_T}\ER\left[\Ssq{\pov{1}}\right] + \dfrac{1}{n_C}\ER\left[\Ssq{\pov{0}}\right] - \dfrac{1}{n}\ER\left[\Ssq{\bm{\tau}}\right],
+\end{align*}
+\normalsize
+since simple random sampling fixes the count $n(\bR)$ at $n$ and complete random assignment fixes the count $n_T(\bZ)$ at $n_T$, so that $n$, $n_T$ and $n_C$ are design constants and pass outside $\ER[\cdot]$. Recalling the definitions of $\Ssq{\pov{1}}$, $\Ssq{\pov{0}}$ and $\Ssq{\bm{\tau}}$ in \eqref{eq: fin sample var treated}, \eqref{eq: fin sample var control} and \eqref{eq: fin sample effects}, we can re-write each as a function of the sample inclusion indicators $\{R_i\}_{i = 1}^N$:
+\small
+\begin{align*}
+\Ssq{\pov{1}} & = \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^N R_i \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^N R_i \po{i}{1}\right)^2 \\
+\Ssq{\pov{0}} & = \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^N R_i \left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^N R_i \po{i}{0}\right)^2  \\
+\Ssq{\bm{\tau}} & = \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^N R_i \left(\tau_{i} - \dfrac{1}{n} \sum \limits_{i = 1}^N R_i \tau_i\right)^2,
+\end{align*}
+\normalsize
+which make explicit that the randomness of these three sample variances (all of which would be fixed in a finite sample setting) stems from the $N$ sample inclusion indicators $\{R_i\}_{i = 1}^N$. They remain \textit{sample} variances, computed over the $n$ sampled units; we keep the subscript $n$ to distinguish them from the population variances $\Ssq[N]{\cdot}$, which are computed over all $N$ units in $\mathcal{P}_N$.
+
+By \citet[][Theorem 2.4]{cochran1977}, under simple random sampling the sample variance with divisor $n - 1$ is \textit{exactly} unbiased for the population variance with divisor $N - 1$; matching divisors are precisely what make the correction factor disappear. Hence
+\small
+\begin{align*}
+\ER\left[\Ssq{\pov{1}}\right] & = \Ssq[N]{\pov{1}} \\
+\ER\left[\Ssq{\pov{0}}\right] & = \Ssq[N]{\pov{0}} \\
+\ER\left[\Ssq{\bm{\tau}}\right] & = \Ssq[N]{\bm{\tau}},
+\end{align*}
+\normalsize
+which implies that
+\small
+\begin{equation*}
+\ER\left[\dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} - \dfrac{\Ssq{\bm{\tau}}}{n}\right] = \dfrac{\Ssq[N]{\pov{1}}}{n_T} + \dfrac{\Ssq[N]{\pov{0}}}{n_C} - \dfrac{\Ssq[N]{\bm{\tau}}}{n}.
+\end{equation*}
+\normalsize
+With these two expressions in hand, it follows that
+\small
+\begin{align*}
+\Var\left[\tauhat\right] & = \ER\left[\VarZ\left[\tauhat\right]\right] + \VarR\left[\EZ\left[\tauhat\right]\right] \\[1ex]
+& = \dfrac{\Ssq[N]{\pov{1}}}{n_T} + \dfrac{\Ssq[N]{\pov{0}}}{n_C} - \dfrac{\Ssq[N]{\bm{\tau}}}{n} + \dfrac{N - n}{N} \, \dfrac{\Ssq[N]{\bm{\tau}}}{n} \\[1ex]
+& = \dfrac{\Ssq[N]{\pov{1}}}{n_T} + \dfrac{\Ssq[N]{\pov{0}}}{n_C} - \Ssq[N]{\bm{\tau}}\left(\dfrac{1}{n} - \dfrac{N - n}{Nn}\right) \\[1ex]
+& = \dfrac{\Ssq[N]{\pov{1}}}{n_T} + \dfrac{\Ssq[N]{\pov{0}}}{n_C} - \dfrac{\Ssq[N]{\bm{\tau}}}{N},
+\end{align*}
+\normalsize
+where the last equality uses $\frac{1}{n} - \frac{N - n}{Nn} = \frac{N - (N - n)}{Nn} = \frac{n}{Nn} = \frac{1}{N}$.
+\end{proof}
+As we can see from \Cref{eq: diff means est PATE}, as $N \to \infty$ (with the population variances bounded), the term $\frac{\Ssq[N]{\bm{\tau}}}{N} \to 0$. Write $\ssq[]{\pov{1}}$, $\ssq[]{\pov{0}}$ and $\ssq[]{\bm{\tau}}$ for the superpopulation variances of the treatment potential outcomes, the control potential outcomes, and the individual effects (the limiting values of $\Ssq[N]{\cdot}$ as the superpopulation grows, equivalently the variances of a single unit's quantities under independent sampling from the superpopulation). In that limit the variance of the PATE estimator becomes
+\begin{equation}
+\label{eq: pate var superpop}
+\Var\left[\tauhat\right] = \dfrac{\ssq[]{\pov{1}}}{n_T} + \dfrac{\ssq[]{\pov{0}}}{n_C}.
+\end{equation}
+Equation \eqref{eq: pate var superpop} is the variance of the Difference-in-Means estimator about the PATE under the standard superpopulation (or \enquote{infinite population}) sampling model, in which we regard the $n$ study units as independent draws from the superpopulation. Unlike the finite sample (SATE) variance, \Cref{eq: pate var superpop} has \textit{no} correction term for effect heterogeneity. The additional sampling variability of $\tauhat$ about the PATE absorbs the $-\,\ssq[]{\bm{\tau}}/\,\cdot$ term that the finite population expression carries. The disappearance of that correction term is exactly why, as we now show, the conservative estimator is not merely conservative for the PATE but \textit{exactly unbiased}.
+
+\section{Estimating the variance for the PATE: the conservative estimator is exactly unbiased}
+
+In the finite sample (SATE) analysis, the \textit{same} estimator we are about to use was \textit{conservative}, overstating the SATE variance by exactly $\Ssq{\bm{\tau}}/n$. We now establish the complementary fact that the same estimator is \textit{exactly unbiased}, not merely conservative, for the variance of the PATE estimator. No new estimator is needed. Recall the estimator from the SATE guide,
+\begin{equation}
+\label{eq: pate conserv var est}
+\Varhat\left[\tauhat\right] = \frac{1}{n_T} \Ssqhat{\pov{1}} + \frac{1}{n_C} \Ssqhat{\pov{0}},
+\end{equation}
+where the sample variances within each group, computed from the sampled units, are
+\small
+\begin{align*}
+\Ssqhat{\pov{1}} & = \left(\frac{1}{n_T - 1}\right) \sum \limits_{i = 1}^N R_i Z_i \left(Y_i - \dfrac{1}{n_T} \sum \limits_{i = 1}^N R_i Z_i Y_i \right)^2 \\
+\Ssqhat{\pov{0}} & = \left(\frac{1}{n_C - 1}\right) \sum \limits_{i = 1}^N R_i (1 - Z_i) \left(Y_i - \dfrac{1}{n_C} \sum \limits_{i = 1}^N R_i (1 - Z_i) Y_i\right)^2.
+\end{align*}
+\normalsize
+
+\begin{prop} \label{prop: pate conservative}
+Suppose the $n$ study units are obtained by independent random sampling from the superpopulation (equivalently, take $N \to \infty$ in the finite population setup above) and treatment is assigned by complete random assignment. Then the estimator $\Varhat[\tauhat]$ in \eqref{eq: pate conserv var est} is \textit{exactly unbiased} for the variance of the PATE estimator:
+\begin{equation*}
+\E\left[\Varhat\left[\tauhat\right]\right] = \dfrac{\ssq[]{\pov{1}}}{n_T} + \dfrac{\ssq[]{\pov{0}}}{n_C} = \Var\left[\tauhat\right].
+\end{equation*}
+That is, the same estimator that is conservative for the SATE is exactly right for the PATE.
+\end{prop}
+
+\begin{proof}
+We compute $\E[\Varhat[\tauhat]]$ by iterating expectations over the assignment process (conditional on the realized sample) and then the sampling process, $\E[\Varhat[\tauhat]] = \ER[\EZ[\Varhat[\tauhat]]]$. Three ingredients do the work.
+
+\textbf{Ingredient 1 (the conditional, finite sample result).} Condition on the realized sample. Within it, the analysis is exactly the finite sample (SATE) analysis, and the sample variances within each group are unbiased for the sample variances over the $n$ sampled units \citep[][Theorem 2.4]{cochran1977}, so $\EZ[\Ssqhat{\pov{1}}] = \Ssq{\pov{1}}$ and $\EZ[\Ssqhat{\pov{0}}] = \Ssq{\pov{0}}$. Hence the estimator is \textit{conditionally} conservative:
+\small
+\begin{equation*}
+\EZ\left[\Varhat\left[\tauhat\right]\right] = \dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} = \VarZ\left[\tauhat\right] + \dfrac{\Ssq{\bm{\tau}}}{n},
+\end{equation*}
+\normalsize
+where the second equality is the SATE variance \eqref{eq: sate var recap}. The conditional overstatement is exactly $\Ssq{\bm{\tau}}/n$.
+
+\textbf{Ingredient 2 (law of total variance).} The PATE variance decomposes as
+\small
+\begin{equation*}
+\Var\left[\tauhat\right] = \ER\left[\VarZ\left[\tauhat\right]\right] + \VarR\left[\EZ\left[\tauhat\right]\right] = \ER\left[\VarZ\left[\tauhat\right]\right] + \VarR\left[\tauS(\bR)\right],
+\end{equation*}
+\normalsize
+using $\EZ[\tauhat] = \tauS(\bR)$.
+
+\textbf{Ingredient 3 (i.i.d.\ sampling moments).} Here i.i.d.\ abbreviates \textit{independent and identically distributed}: each study unit is drawn independently of the others, and every unit is drawn from the same superpopulation distribution. Because the $n$ study units are independent draws from the superpopulation, the sample average treatment effect $\tauS(\bR)$ is the mean of $n$ independent draws of the individual effect, and $\Ssq{\bm{\tau}}$ is the corresponding sample variance. Hence
+\small
+\begin{equation*}
+\VarR\left[\tauS(\bR)\right] = \dfrac{\ssq[]{\bm{\tau}}}{n} \quad \text{and} \quad \ER\left[\Ssq{\bm{\tau}}\right] = \ssq[]{\bm{\tau}},
+\end{equation*}
+\normalsize
+both of which are standard facts for an i.i.d. sample, the first for the variance of a sample mean and the second for the unbiasedness of the sample variance. (The same reasoning gives $\ER[\Ssq{\pov{1}}] = \ssq[]{\pov{1}}$ and $\ER[\Ssq{\pov{0}}] = \ssq[]{\pov{0}}$.)
+
+Now take the expectation of Ingredient 1 over the sampling distribution:
+\small
+\begin{align*}
+\E\left[\Varhat\left[\tauhat\right]\right] & = \ER\left[\EZ\left[\Varhat\left[\tauhat\right]\right]\right] = \ER\left[\VarZ\left[\tauhat\right] + \dfrac{\Ssq{\bm{\tau}}}{n}\right] \\
+& = \ER\left[\VarZ\left[\tauhat\right]\right] + \dfrac{\ER\left[\Ssq{\bm{\tau}}\right]}{n} = \ER\left[\VarZ\left[\tauhat\right]\right] + \dfrac{\ssq[]{\bm{\tau}}}{n},
+\end{align*}
+\normalsize
+using Ingredient 3 in the last step. Subtracting the PATE variance from Ingredient 2,
+\small
+\begin{align*}
+\E\left[\Varhat\left[\tauhat\right]\right] - \Var\left[\tauhat\right] & = \left(\ER\left[\VarZ\left[\tauhat\right]\right] + \dfrac{\ssq[]{\bm{\tau}}}{n}\right) - \left(\ER\left[\VarZ\left[\tauhat\right]\right] + \VarR\left[\tauS(\bR)\right]\right) \\[1ex]
+& = \dfrac{\ssq[]{\bm{\tau}}}{n} - \VarR\left[\tauS(\bR)\right] \\[1ex]
+& = \dfrac{\ssq[]{\bm{\tau}}}{n} - \dfrac{\ssq[]{\bm{\tau}}}{n} = 0,
+\end{align*}
+\normalsize
+again by Ingredient 3. Hence $\E[\Varhat[\tauhat]] = \Var[\tauhat]$. Computing the common value directly, take expectations of Ingredient 1 and use $\ER[\Ssq{\pov{1}}] = \ssq[]{\pov{1}}$ and $\ER[\Ssq{\pov{0}}] = \ssq[]{\pov{0}}$:
+\small
+\begin{equation*}
+\E\left[\Varhat\left[\tauhat\right]\right] = \ER\left[\dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C}\right] = \dfrac{\ssq[]{\pov{1}}}{n_T} + \dfrac{\ssq[]{\pov{0}}}{n_C} = \Var\left[\tauhat\right],
+\end{equation*}
+\normalsize
+the last equality by \eqref{eq: pate var superpop}.
+\end{proof}
+
+The cancellation in the proof has a simple interpretation. Conditional on the sample, the conservative estimator overshoots the SATE variance by exactly $\Ssq{\bm{\tau}}/n$, the penalty for effect heterogeneity that makes the estimator conservative for the SATE. The PATE estimator must also contend with a source of variability that the SATE estimator does not, namely the randomness in which units are sampled, which makes the sample's SATE fluctuate about the PATE with variance $\VarR[\tauS(\bR)] = \ssq[]{\bm{\tau}}/n$. In expectation the conditional overstatement $\Ssq{\bm{\tau}}/n$ equals the extra sampling variance $\ssq[]{\bm{\tau}}/n$. The slack that makes the estimator conservative for the SATE is precisely the variability the estimator must absorb to be exactly right for the PATE. So the same estimator is conservative for the SATE and exactly unbiased for the PATE.
+
+The finite population case differs slightly from the exact unbiasedness just established. Suppose that, instead of independent draws from the superpopulation, the $n$ units are obtained by simple random sampling \textit{without replacement} from a \textit{finite} population of fixed size $N$, the setting of \Cref{prop: superpop var}. Then the two quantities above no longer cancel exactly. A finite population correction leaves a residual $\ER[\Ssq{\bm{\tau}}]/n - \VarR[\tauS(\bR)] = \Ssq[N]{\bm{\tau}}/n - \frac{N - n}{N}\Ssq[N]{\bm{\tau}}/n = \Ssq[N]{\bm{\tau}}/N \geq 0$, so the estimator is mildly conservative, with bias $\Ssq[N]{\bm{\tau}}/N$. This residual vanishes as $N \to \infty$, which recovers the exact unbiasedness above. The exact result is therefore the one that pertains to the PATE proper, the average effect in the (effectively infinite) superpopulation from which studies draw their samples.
+
+\begin{singlespace}
+\bibliographystyle{chicago}
+\bibliography{references}
+\end{singlespace}
+
+\end{document}

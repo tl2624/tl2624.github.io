@@ -1,0 +1,244 @@
+\RequirePackage[l2tabu, orthodox]{nag} % warn about outdated packages
+\documentclass[12pt,leqno]{article}
+\usepackage{microtype} %
+\usepackage{setspace}
+\onehalfspacing
+% Let TeX loosen interword spacing rather than overflow the margin when a long
+% unbreakable math atom lands awkwardly.
+\emergencystretch=3em
+\usepackage{xcolor, color, ucs}     % http://ctan.org/pkg/xcolor
+\usepackage{natbib}
+\usepackage{booktabs}          % package for thick lines in tables
+\usepackage{amsfonts,amsthm,amsmath,amssymb}          % AMS Stuff
+\usepackage{empheq}            % To use left brace on {align} environment
+\usepackage{graphicx}          % Insert .pdf, .eps or .png
+\usepackage{enumitem}          % http://ctan.org/pkg/enumitem
+\usepackage[mathscr]{euscript}          % Font for right expectation sign
+\usepackage{tabularx}          % Get scale boxes for tables
+\usepackage{float}             % Force floats around
+\usepackage{afterpage}% http://ctan.org/pkg/afterpage
+\usepackage[T1]{fontenc}
+\usepackage{rotating}          % Rotate long tables horizontally
+\usepackage{bbm}                % for bold betas
+\usepackage{bm} 
+\usepackage{csquotes}           % \enquote{} and \textquote[][]{} environments
+\usepackage{subfig}
+\usepackage{lscape}
+\usepackage{titling}            % modify maketitle in latex
+% \usepackage{mathtools}          % multlined environment with size option
+\usepackage{verbatim}
+\usepackage{geometry}
+\usepackage{bigfoot}
+\usepackage[format=hang,
+            font={small},
+            labelfont=bf,
+            textfont=rm]{caption}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\geometry{verbose,margin=2cm,nomarginpar}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+\usepackage{url}
+\usepackage{relsize}            % \mathlarger{} environment
+
+% COLOR FOR LINKS (defined here because hyperref reads it as an option below)
+\definecolor{linknavy}{RGB}{31,78,121}
+
+\usepackage[unicode=true,
+            pdfusetitle,
+            bookmarks=true,
+            bookmarksnumbered=true,
+            bookmarksopen=true,
+            bookmarksopenlevel=2,
+            breaklinks=false,
+            pdfborder={0 0 1},
+            backref=page,
+            colorlinks=true,
+            hyperfootnotes=true,
+            hypertexnames=false,
+            pdfstartview={XYZ null null 1},
+            citecolor=linknavy,
+            linkcolor=linknavy,
+            urlcolor=linknavy]{hyperref}
+\usepackage{hypernat}
+
+\usepackage{multirow}
+\usepackage{titlesec}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\bfseries}
+\usepackage[noabbrev]{cleveref} % Should be loaded after \usepackage{hyperref}
+
+\parskip=12pt
+\parindent=0pt
+\delimitershortfall=-1pt
+\interfootnotelinepenalty=100000
+
+\makeatletter
+\def\thm@space@setup{\thm@preskip=0pt
+\thm@postskip=0pt}
+\makeatother
+
+\allowdisplaybreaks
+\newtheoremstyle{newstyle}
+{12pt} %Aboveskip
+{12pt} %Below skip
+{\itshape} %Body font e.g.\mdseries,\bfseries,\scshape,\itshape
+{} %Indent
+{\bfseries} %Head font e.g.\bfseries,\scshape,\itshape
+{.} %Punctuation afer theorem header
+{ } %Space after theorem header
+{} %Heading
+
+\theoremstyle{newstyle}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defin}[thm]{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newcommand{\given}[1][]{\:#1\vert\:}
+\DeclareMathOperator{\E}{\mathrm{E}}
+\DeclareMathOperator{\Var}{\mathrm{Var}}
+\DeclareMathOperator{\Cov}{\mathrm{Cov}}
+\newcommand{\R}{\mathbb{R}}              % ordinary symbol, not an operator
+
+% ---------- sources of randomness ----------
+\newcommand{\bZ}{\bm{Z}}   \newcommand{\bz}{\bm{z}}   % assignment: random / realized
+\newcommand{\bR}{\bm{R}}   \newcommand{\br}{\bm{r}}   % sampling:   random / realized
+\newcommand{\EZ}{\E_{\Omega}}    \newcommand{\VarZ}{\Var_{\Omega}}  % over assignment
+\newcommand{\ER}{\E_{\Pi}}       \newcommand{\VarR}{\Var_{\Pi}}     % over sampling
+
+% ---------- potential outcomes (function form) ----------
+\newcommand{\po}[2]{y_{#1}(#2)}     % \po{i}{1} -> y_i(1); \po{i}{\bZ} -> y_i(Z)
+\newcommand{\pov}[1]{\bm{y}(#1)}    % \pov{1}   -> bold y(1)
+\newcommand{\ybar}[1]{\bar{y}(#1)}  % \ybar{1}  -> sample mean of y_i(1)
+
+% ---------- estimands and estimator ----------
+\newcommand{\tauS}{\tau_{\text{SATE}}}
+\newcommand{\tauP}{\tau_{\text{PATE}}}
+\newcommand{\tauhat}{\hat{\tau}}
+
+% ---------- variance families: letter = divisor family, subscript = index set ----------
+\newcommand{\Ssq}[2][n]{S_{#1}^{2}(#2)}
+\newcommand{\ssq}[2][n]{\sigma_{#1}^{2}(#2)}
+\newcommand{\scov}[2][n]{\sigma_{#1}(#2)}
+\newcommand{\Ssqhat}[2][n]{\widehat{S}_{#1}^{2}(#2)}
+\newcommand{\ssqhat}[2][n]{\widehat{\sigma}_{#1}^{2}(#2)}
+\newcommand{\Varhat}{\widehat{\Var}}
+
+% ---------- misc ----------
+\newcommand{\ind}[1]{\mathbbm{1}\left[#1\right]}
+
+
+% \Pr is a limits-taking operator by default, so a subscript like \Pr_{\Omega}
+% lands fully beneath Pr in display style; redefine it so the distribution
+% subscript sits beside the operator, matching \E and \Var.
+\renewcommand{\Pr}{\operatorname{Pr}}
+
+% COLORS FOR EQUATIONS (3-class Dark2, colorblind-safe)
+\definecolor{eqgreen}{RGB}{27,158,119}
+\definecolor{eqblue}{RGB}{117,112,179}
+\definecolor{eqred}{RGB}{217,95,2}
+
+\begin{document}
+
+\title{Notation and Setup for Design-Based Causal Inference\thanks{This is a live document that is subject to updating at any time.}}
+\author{Thomas Leavitt}
+\date{}
+\maketitle
+
+This guide collects, in one place, the notation and formal setup shared by the companion guides on (i) the unbiasedness of the Difference-in-Means estimator, (ii) the variance of the Difference-in-Means estimator and the estimation of that variance, and (iii) the corresponding results for a superpopulation (the Population Average Treatment Effect). Each of those guides states these objects only as far as its own proofs require and refers back here for the full development; this guide is the canonical reference. A reader who is already comfortable with the potential outcomes framework for randomized experiments can safely skim this guide.
+
+\section{Units, assignments, and the assignment mechanism}
+
+Let the index $i \in \{1, \ldots , n\}$ run over $n$ units in a finite sample, $\mathcal{S}_n$, where $n \geq 4$. Of these $n$ units, $n_T \geq 2$ are assigned to the treatment condition and $n_C \geq 2$ are assigned to the control condition, where $n_T + n_C = n$. The bounds $n_T \geq 2$ and $n_C \geq 2$ (and hence $n \geq 4$) are not needed for the unbiasedness of the estimator or for the variance formula itself; they ensure that the conservative (Neyman) estimator of the variance (developed in a companion guide) is well defined. That estimator computes a separate sample variance within each treatment arm, dividing by $n_T - 1$ for the treated units and by $n_C - 1$ for the control units, and a sample variance requires at least two observations; we therefore need at least two units in each arm, i.e., $n_T \geq 2$ and $n_C \geq 2$, so that $n = n_T + n_C \geq 4$.
+
+Let the binary indicator variable $Z_i \in \{0, 1\}$ denote whether unit $i$ is assigned to treatment $(Z_i = 1)$ or control $(Z_i = 0)$, and collect these indicators in the random assignment vector $\bZ = \begin{bmatrix} Z_1, \dots , Z_n\end{bmatrix}^\top$. The set of all logically possible assignment vectors is $\{0, 1\}^n$. Every assignment vector determines how many units it sends to treatment: Write $n_T(\bz) \coloneqq \sum_{i = 1}^n z_i$ for this count, and $n_C(\bz) \coloneqq n - n_T(\bz)$. Applied to the random vector, the count $n_T(\bZ)$ is itself a random variable, a function of $\bZ$ in exactly the way the potential outcomes below are functions of $\bz$. The assignment mechanism places positive probability only on a subset of the $2^n$ logically possible vectors. Under \textit{complete random assignment} the design fixes the count, restricting the support to
+\begin{equation*}
+\Omega = \left\{\bz \in \left\{0, 1\right\}^n: n_T(\bz) = n_T\right\},
+\end{equation*}
+where $n_T$ is a constant that the experimenter chooses. On $\Omega$ the random count $n_T(\bZ)$ equals the constant $n_T$ with probability one, so we write the plain constant, just as $z_i$ denotes the realized value of $Z_i$. The set $\Omega$ is the support of $\bZ$. Under complete random assignment, $\bZ$ is distributed uniformly on $\Omega$, and the number of elements in $\Omega$, denoted $\lvert \Omega \rvert$,\footnote{For an arbitrary set $W$, let $\lvert W \rvert$ denote the cardinality of (i.e., the number of elements in) the set $W$.} is $\binom{n}{n_T}$. By contrast, under $n$ independent Bernoulli assignments, there would be $2^n$ possible assignment vectors.
+
+It helps to distinguish three objects that are easily conflated. The \textit{assignment space} $\{0, 1\}^n$ is the set of all conceivable assignments. The \textit{support} $\Omega \subseteq \{0, 1\}^n$ is the (typically much smaller) set of assignments the mechanism can actually produce. And the \textit{randomization distribution} is the probability distribution the mechanism places on $\Omega$ (uniform, under complete random assignment). All of the randomness in what follows comes from this distribution. One convention holds throughout the guides: $\Omega$ always denotes the support of $\bZ$ under the assignment mechanism in force, and when an argument moves between mechanisms we condition explicitly rather than change the symbol. The level set construction also scales to stratified designs: A blocked or matched study fixes a treated count within each stratum, so its support is a product of per-stratum level sets. Later guides on matched observational studies will use exactly this form.
+
+The same framework accommodates \textit{simple random assignment}, under which each of the $n$ units is independently assigned to treatment. Two features change. First, no design constraint pins down the count, so $n_T(\bZ)$ is a nondegenerate random variable. Second, we exclude the two degenerate assignment vectors (all treated and all control), under which one group is empty and the Difference-in-Means estimator is undefined; the support is therefore $\Omega = \{\bz \in \{0,1\}^n: 0 < n_T(\bz) < n\}$, which has $2^n - 2$ elements. The exclusion changes the distribution, so we state the distribution explicitly: $\bZ$ is distributed as $n$ independent Bernoulli draws \textit{conditioned on} the event $\{0 < n_T(\bZ) < n\}$, and the conditioning breaks the independence of the coordinates. Even though the design does not fix $n_T(\bZ)$, one can fix the count by conditioning on its realized value: The randomization distribution conditional on the event $\{n_T(\bZ) = n_T\}$ is exactly the complete random assignment distribution above. Hence results derived under complete random assignment carry over to simple random assignment after conditioning on the realized number of treated units.
+
+\section{The potential outcomes schedule and the Stable Unit Treatment Value Assumption}
+
+Adopting the terminology of \citet{freedman2009} and later \citet{gerbergreen2012}, define a potential outcomes schedule as a vector-valued function $\bm{y}: \{0, 1\}^n \to \R^n$ that maps each possible assignment vector $\bz \in \{0, 1\}^n$ to an $n$-dimensional vector of real-valued outcomes. The schedule lists how each of the $n$ study participants would respond to every assignment $\bz$ that the experiment could in principle produce. The schedule is a \textit{fixed} feature of the units; randomness enters only through which assignment the mechanism happens to select. The passage from this general object to the familiar pair of potential outcomes proceeds in numbered steps. We will use the same format, general object followed by assumption followed by licensed simplification, whenever an assumption changes what the notation needs to carry.
+
+\textbf{Step 1 (general object).} Unit $i$'s outcome under assignment $\bz$ is the $i$th coordinate of the schedule's value, written $\po{i}{\bz}$. Composed with the random assignment, $\po{i}{\bZ}$ is a random variable that could in principle take as many as $2^n$ distinct values, one for each assignment vector.
+
+\textbf{Step 2 (assumption invoked).} Under the Stable Unit Treatment Value Assumption (SUTVA)\footnote{SUTVA implies that (1) units in the experiment respond to only the treatment condition to which each unit is individually assigned and (2) the treatment condition is actually the same treatment for all units assigned to treatment and the control condition is the same for all units assigned to control.} \citep{cox1958a,rubin1980b,rubin1986}, unit $i$'s outcome depends on the assignment vector only through unit $i$'s own coordinate: For any $\bz, \bz^{\prime}$ with $z_i = z_i^{\prime}$, we have $\po{i}{\bz} = \po{i}{\bz^{\prime}}$.
+
+\textbf{Step 3 (licensed simplification).} By Step 2, the map $\bz \mapsto \po{i}{\bz}$ depends on $\bz$ only through $z_i$, so it is well defined to write $\po{i}{1}$ for the common value of $\po{i}{\bz}$ across all $\bz$ with $z_i = 1$, and $\po{i}{0}$ for the common value across all $\bz$ with $z_i = 0$. SUTVA thus collapses $2^n$ numbers per unit to two fixed numbers per unit. The individual causal effect for unit $i$ on the additive scale is $\tau_i \coloneqq \po{i}{1} - \po{i}{0}$. The vectors $\pov{1}$ and $\pov{0}$ collect the treatment and control potential outcomes for all $n$ units, and $\bm{\tau}$ collects the $n$ individual effects; all of these are fixed, finite population quantities.
+
+\textbf{Step 4 (realization).} The observed outcome for unit $i \in \{1, \ldots, n\}$ is
+\begin{equation*}
+Y_i \coloneqq \po{i}{Z_i} = Z_i \po{i}{1} + \left(1 - Z_i\right) \po{i}{0},
+\end{equation*}
+which is random only through $Z_i$; under the realized assignment $\bZ = \bz$ it is the number $\po{i}{z_i}$. Potential outcomes are fixed, the assignment is random, and observed outcomes are random only because a random assignment selects which fixed potential outcome we see.
+
+\section{Estimands and the Difference-in-Means estimator}
+
+Write $\ybar{1} \coloneqq n^{-1} \sum_{i = 1}^n \po{i}{1}$ and $\ybar{0} \coloneqq n^{-1} \sum_{i = 1}^n \po{i}{0}$ for the finite population means of the treatment and control potential outcomes; both are fixed quantities. The target of interest is the Sample Average Treatment Effect (SATE),
+\begin{equation*}
+\tauS \coloneqq n^{-1} \sum \limits_{i = 1}^n \tau_i = n^{-1} \sum \limits_{i = 1}^n \left(\po{i}{1} - \po{i}{0}\right) = \ybar{1} - \ybar{0},
+\end{equation*}
+which is likewise a fixed (though unknown) quantity. The Difference-in-Means estimator of $\tauS$ is
+\begin{equation*}
+\tauhat \coloneqq \dfrac{\sum \limits_{i = 1}^n Z_i Y_i}{\sum\limits_{i = 1}^n Z_i}  - \dfrac{\sum \limits_{i = 1}^n \left(1 - Z_i\right) Y_i}{\sum\limits_{i = 1}^n \left(1 - Z_i\right)}.
+\end{equation*}
+Unlike the estimand $\tauS$, the estimator $\tauhat$ is a \textit{random variable}, since it is a function of the random assignment vector $\bZ$ and inherits all of its randomness from $\bZ$. The denominators of the ratio form are the counts $n_T(\bZ)$ and $n_C(\bZ)$; under complete random assignment the design fixes them at $n_T$ and $n_C$, so $\tauhat$ can equivalently be written
+\begin{equation*}
+\tauhat = \dfrac{1}{n_T} \sum \limits_{i = 1}^n Z_i Y_i - \dfrac{1}{n_C} \sum \limits_{i = 1}^n \left(1 - Z_i\right) Y_i.
+\end{equation*}
+We use the ratio form when the number of treated units may be random (e.g., under simple random assignment) and the form with fixed denominators when $n_T$ and $n_C$ are fixed.
+
+Because the only randomness is the assignment, we write $\EZ[\cdot]$ and $\VarZ[\cdot]$ for expectations and variances taken over the distribution of $\bZ$ on $\Omega$, to emphasize that they pertain to the randomization distribution alone. The subscript names the distribution in force on $\Omega$, not the set itself. In these guides that distribution is the uniform one just described; the same support can carry other distributions, however, as when a sensitivity analysis considers departures from uniform assignment, and guides that consider a family of distributions on $\Omega$ will then name the member explicitly in the subscript.
+
+\section{Finite population variances of the potential outcomes}
+
+Two equivalent families of finite population variances appear in the variance results. The first uses the divisor $n - 1$:
+\begin{align*}
+\Ssq{\pov{1}} & = \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^n \left(\po{i}{1} - \ybar{1}\right)^2 \\
+\Ssq{\pov{0}} & = \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^n \left(\po{i}{0} - \ybar{0}\right)^2 \\
+\Ssq{\bm{\tau}} & = \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^n \left(\tau_{i} - \tauS\right)^2.
+\end{align*}
+The second uses the divisor $n$ and is the form found in, e.g., \citet[][Equation 3.4]{gerbergreen2012}:
+\begin{align*}
+\ssq{\pov{1}} & = \left(\frac{1}{n}\right)\sum \limits_{i = 1}^n \left(\po{i}{1} - \ybar{1}\right)^2 \\
+\ssq{\pov{0}} & = \left(\frac{1}{n}\right)\sum \limits_{i = 1}^n \left(\po{i}{0} - \ybar{0}\right)^2 \\
+\scov{\pov{0}, \pov{1}} & = \left(\frac{1}{n}\right)\sum \limits_{i = 1}^n \left(\po{i}{0} - \ybar{0}\right)\left(\po{i}{1} - \ybar{1}\right).
+\end{align*}
+The two families are related by $\ssq{\cdot} = \frac{n - 1}{n} \Ssq{\cdot}$, and likewise for the covariance term. All of these are fixed, finite population quantities, and they will be the building blocks of the variance of $\tauhat$. The naming rule deserves one explicit statement: The letter $S$ marks the divisor one less than the size, the letter $\sigma$ marks the divisor equal to the size itself, the subscript names the index set ($n$ for the sample $\mathcal{S}_n$, $N$ for the superpopulation $\mathcal{P}_N$), and the absence of a subscript marks the infinite superpopulation limit introduced at the end of the next section.
+
+\section{Extension to a superpopulation: the Population Average Treatment Effect}
+
+For results about the Population Average Treatment Effect (PATE), we embed the finite sample in a superpopulation. Consider a superpopulation $\mathcal{P}_N$ of size $N \geq n \geq 4$, with index $i \in \{1, \ldots , N\}$, and let $n$ units be drawn from $\mathcal{P}_N$ by simple random sampling into the experimental sample $\mathcal{S}_n$, while the remaining $N - n$ units are unsampled. Among the $n$ sampled units, $n_T \geq 2$ are assigned to treatment and $n_C \geq 2$ to control by complete random assignment, exactly as above.
+
+The binary indicator $R_i \in \{0, 1\}$ records whether unit $i$ is included $(R_i = 1)$ or excluded $(R_i = 0)$ from the sample, and we collect these in $\bR = \begin{bmatrix} R_1, \dots , R_N\end{bmatrix}^\top$. Write $n(\br) \coloneqq \sum_{i = 1}^N r_i$ for the number of units a sampling vector selects; the support of $\bR$ is then $\Pi = \{\br \in \{0,1\}^N: n(\br) = n\}$, the same level set construction that defined $\Omega$, now applied to the sampling stage. Simple random sampling fixes $n(\bR) = n$ with probability one and distributes $\bR$ uniformly on $\Pi$, so we write the plain constant $n$, exactly as we write $n_T$ under complete random assignment. The estimand is the PATE,
+\begin{equation*}
+\tauP \coloneqq N^{-1} \sum \limits_{i = 1}^N \tau_i,
+\end{equation*}
+and the corresponding population variances, which follow the naming rule of the previous section (letter $S$, divisor $N - 1$, subscript $N$ for $\mathcal{P}_N$), are
+\begin{align*}
+\Ssq[N]{\pov{1}} & = \left(\frac{1}{N - 1}\right)\sum \limits_{i = 1}^{N} \left(\po{i}{1} - \dfrac{1}{N} \sum \limits_{i = 1}^{N} \po{i}{1}\right)^2 \\
+\Ssq[N]{\pov{0}} & = \left(\frac{1}{N - 1}\right)\sum \limits_{i = 1}^{N} \left(\po{i}{0} - \dfrac{1}{N} \sum \limits_{i = 1}^{N} \po{i}{0}\right)^2 \\
+\Ssq[N]{\bm{\tau}} & = \left(\frac{1}{N - 1}\right) \sum \limits_{i = 1}^{N} \left(\tau_i - \tauP\right)^2.
+\end{align*}
+The divisor $N - 1$ pays off in the PATE variance guide: With this convention, the sample variance $\Ssq{\cdot}$ is \textit{exactly} unbiased for $\Ssq[N]{\cdot}$ under simple random sampling, with no correction factor.
+In this setting the Difference-in-Means estimator has \textit{two} sources of randomness, sampling $\{R_i\}_{i = 1}^N$ and assignment $\{Z_i\}_{i = 1}^n$. We write $\ER[\cdot]$ and $\VarR[\cdot]$ for expectations and variances over the sampling distribution, $\EZ[\cdot]$ and $\VarZ[\cdot]$ for those over the assignment distribution (conditional on the sample), and the unsubscripted $\E[\cdot]$ and $\Var[\cdot]$ for those over both. The two are connected by the law of total variance,
+\begin{equation*}
+\Var\left[\tauhat\right] = \ER\left[\VarZ\left[\tauhat\right]\right] + \VarR\left[\EZ\left[\tauhat\right]\right],
+\end{equation*}
+which is the organizing identity for the PATE variance derivation. Finally, as $N \to \infty$ with the population variances bounded, the quantities $\Ssq[N]{\cdot}$ converge to limits that we write $\ssq[]{\cdot}$, with no subscript; these limiting superpopulation variances govern the infinite superpopulation results in the PATE variance guide.
+
+\begin{singlespace}
+\bibliographystyle{chicago}
+\bibliography{references}
+\end{singlespace}
+
+\end{document}

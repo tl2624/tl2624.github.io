@@ -1,0 +1,617 @@
+\RequirePackage[l2tabu, orthodox]{nag} % warn about outdated packages
+\documentclass[12pt,leqno]{article}
+\usepackage{microtype} %
+\usepackage{setspace}
+\onehalfspacing
+% Let TeX loosen interword spacing rather than overflow the margin when a long
+% unbreakable math atom lands awkwardly.
+\emergencystretch=3em
+\usepackage{xcolor, color, ucs}     % http://ctan.org/pkg/xcolor
+\usepackage{natbib}
+\usepackage{booktabs}          % package for thick lines in tables
+\usepackage{amsfonts,amsthm,amsmath,amssymb}          % AMS Stuff
+\usepackage{empheq}            % To use left brace on {align} environment
+\usepackage{graphicx}          % Insert .pdf, .eps or .png
+\usepackage{enumitem}          % http://ctan.org/pkg/enumitem
+\usepackage[mathscr]{euscript}          % Font for right expectation sign
+\usepackage{tabularx}          % Get scale boxes for tables
+\usepackage{float}             % Force floats around
+\usepackage{afterpage}% http://ctan.org/pkg/afterpage
+\usepackage[T1]{fontenc}
+\usepackage{rotating}          % Rotate long tables horizontally
+\usepackage{bbm}                % for bold betas
+\usepackage{bm} 
+\usepackage{csquotes}           % \enquote{} and \textquote[][]{} environments
+\usepackage{subfig}
+\usepackage{lscape}
+\usepackage{titling}            % modify maketitle in latex
+% \usepackage{mathtools}          % multlined environment with size option
+\usepackage{verbatim}
+\usepackage{geometry}
+\usepackage{bigfoot}
+\usepackage[format=hang,
+            font={small},
+            labelfont=bf,
+            textfont=rm]{caption}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\geometry{verbose,margin=2cm,nomarginpar}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+\usepackage{url}
+\usepackage{relsize}            % \mathlarger{} environment
+
+% COLOR FOR LINKS (defined here because hyperref reads it as an option below)
+\definecolor{linknavy}{RGB}{31,78,121}
+
+\usepackage[unicode=true,
+            pdfusetitle,
+            bookmarks=true,
+            bookmarksnumbered=true,
+            bookmarksopen=true,
+            bookmarksopenlevel=2,
+            breaklinks=false,
+            pdfborder={0 0 1},
+            backref=page,
+            colorlinks=true,
+            hyperfootnotes=true,
+            hypertexnames=false,
+            pdfstartview={XYZ null null 1},
+            citecolor=linknavy,
+            linkcolor=linknavy,
+            urlcolor=linknavy]{hyperref}
+\usepackage{hypernat}
+
+\usepackage{multirow}
+\usepackage{titlesec}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\bfseries}
+\usepackage[noabbrev]{cleveref} % Should be loaded after \usepackage{hyperref}
+
+\parskip=12pt
+\parindent=0pt
+\delimitershortfall=-1pt
+\interfootnotelinepenalty=100000
+
+\makeatletter
+\def\thm@space@setup{\thm@preskip=0pt
+\thm@postskip=0pt}
+\makeatother
+
+\allowdisplaybreaks
+\newtheoremstyle{newstyle}
+{12pt} %Aboveskip
+{12pt} %Below skip
+{\itshape} %Body font e.g.\mdseries,\bfseries,\scshape,\itshape
+{} %Indent
+{\bfseries} %Head font e.g.\bfseries,\scshape,\itshape
+{.} %Punctuation afer theorem header
+{ } %Space after theorem header
+{} %Heading
+
+\theoremstyle{newstyle}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defin}[thm]{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newcommand{\given}[1][]{\:#1\vert\:}
+\DeclareMathOperator{\E}{\mathrm{E}}
+\DeclareMathOperator{\Var}{\mathrm{Var}}
+\DeclareMathOperator{\Cov}{\mathrm{Cov}}
+\newcommand{\R}{\mathbb{R}}              % ordinary symbol, not an operator
+
+% ---------- sources of randomness ----------
+\newcommand{\bZ}{\bm{Z}}   \newcommand{\bz}{\bm{z}}   % assignment: random / realized
+\newcommand{\bR}{\bm{R}}   \newcommand{\br}{\bm{r}}   % sampling:   random / realized
+\newcommand{\EZ}{\E_{\Omega}}    \newcommand{\VarZ}{\Var_{\Omega}}  % over assignment
+\newcommand{\ER}{\E_{\Pi}}       \newcommand{\VarR}{\Var_{\Pi}}     % over sampling
+
+% ---------- potential outcomes (function form) ----------
+\newcommand{\po}[2]{y_{#1}(#2)}     % \po{i}{1} -> y_i(1); \po{i}{\bZ} -> y_i(Z)
+\newcommand{\pov}[1]{\bm{y}(#1)}    % \pov{1}   -> bold y(1)
+\newcommand{\ybar}[1]{\bar{y}(#1)}  % \ybar{1}  -> sample mean of y_i(1)
+
+% ---------- estimands and estimator ----------
+\newcommand{\tauS}{\tau_{\text{SATE}}}
+\newcommand{\tauP}{\tau_{\text{PATE}}}
+\newcommand{\tauhat}{\hat{\tau}}
+
+% ---------- variance families: letter = divisor family, subscript = index set ----------
+\newcommand{\Ssq}[2][n]{S_{#1}^{2}(#2)}
+\newcommand{\ssq}[2][n]{\sigma_{#1}^{2}(#2)}
+\newcommand{\scov}[2][n]{\sigma_{#1}(#2)}
+\newcommand{\Ssqhat}[2][n]{\widehat{S}_{#1}^{2}(#2)}
+\newcommand{\ssqhat}[2][n]{\widehat{\sigma}_{#1}^{2}(#2)}
+\newcommand{\Varhat}{\widehat{\Var}}
+
+% ---------- misc ----------
+\newcommand{\ind}[1]{\mathbbm{1}\left[#1\right]}
+
+
+% \Pr is a limits-taking operator by default, so a subscript like \Pr_{\Omega}
+% lands fully beneath Pr in display style; redefine it so the distribution
+% subscript sits beside the operator, matching \E and \Var.
+\renewcommand{\Pr}{\operatorname{Pr}}
+
+% COLORS FOR EQUATIONS (3-class Dark2, colorblind-safe)
+\definecolor{eqgreen}{RGB}{27,158,119}
+\definecolor{eqblue}{RGB}{117,112,179}
+\definecolor{eqred}{RGB}{217,95,2}
+
+\begin{document}
+
+\title{Variance of the Difference-in-Means Estimator for the SATE and Estimation of That Variance\thanks{This is a live document that is subject to updating at any time.}}
+\author{Thomas Leavitt}
+\date{}
+\maketitle
+
+This guide derives the variance of the Difference-in-Means estimator for the Sample Average Treatment Effect (SATE) under complete random assignment, and then develops a conservative estimator of that variance. The setup below is self-contained; readers wanting the full development of the framework can consult the companion guide \enquote{Notation and Setup for Design-Based Causal Inference.} These results extend to a superpopulation, where the estimand is the Population Average Treatment Effect (PATE); that extension is the companion guide \enquote{Variance of the Difference-in-Means Estimator for the PATE and Estimation of That Variance}.
+
+\section{Variance of the Difference-in-Means estimator for the Sample Average Treatment Effect (SATE)}
+
+\subsection{Setup} \label{sec: SATE setup}
+
+This section states the framework only as far as the derivations require; the companion guide \enquote{Notation and Setup for Design-Based Causal Inference} develops each object in full, with the reasoning behind it.
+
+Let the index $i \in \{1, \ldots , n\}$ run over the $n$ units of a finite sample, $\mathcal{S}_n$, of which $n_T \geq 2$ receive treatment and $n_C = n - n_T \geq 2$ receive control, so that $n \geq 4$; these bounds ensure that the variance estimator developed below, which forms a separate sample variance within each arm, is well defined. The indicator $Z_i \in \{0, 1\}$ records whether unit $i$ is assigned to treatment $(Z_i = 1)$ or control $(Z_i = 0)$, and the random assignment vector $\bZ = \begin{bmatrix} Z_1, \dots , Z_n\end{bmatrix}^\top$ collects the indicators. Write $n_T(\bz) \coloneqq \sum_{i = 1}^n z_i$ for the number of treated units under an assignment $\bz$, so that $n_T(\bZ)$ is a random variable. Under \textit{complete random assignment} the design fixes the count: The support of $\bZ$ is $\Omega = \{\bz \in \{0, 1\}^n: n_T(\bz) = n_T\}$, on which $n_T(\bZ)$ equals the design constant $n_T$ with probability one, and $\bZ$ is distributed uniformly on $\Omega$, whose cardinality\footnote{For an arbitrary set $W$, let $\lvert W \rvert$ denote the cardinality of (i.e., the number of elements in) the set $W$.} is $\lvert \Omega \rvert = \binom{n}{n_T}$. The unbiasedness guide shows how the same analysis covers simple random assignment after conditioning on the event $\{n_T(\bZ) = n_T\}$.
+
+Under the Stable Unit Treatment Value Assumption (SUTVA), unit $i$'s potential outcome depends on the assignment vector only through unit $i$'s own coordinate, so each unit carries two \textit{fixed} potential outcomes, $\po{i}{1}$ and $\po{i}{0}$, with individual effect $\tau_i \coloneqq \po{i}{1} - \po{i}{0}$. The observed outcome is $Y_i \coloneqq \po{i}{Z_i} = Z_i \po{i}{1} + (1 - Z_i)\po{i}{0}$, random only through $Z_i$. The setup guide develops the potential outcomes schedule, states SUTVA precisely, and walks through the collapse from $\po{i}{\bZ}$ to $\po{i}{1}$ and $\po{i}{0}$ in numbered steps.
+
+Write $\ybar{1} \coloneqq n^{-1} \sum_{i = 1}^n \po{i}{1}$ and $\ybar{0} \coloneqq n^{-1} \sum_{i = 1}^n \po{i}{0}$ for the finite population means of the treatment and control potential outcomes; both are fixed quantities. The target of interest is the Sample Average Treatment Effect (SATE),
+\begin{equation*}
+\tauS \coloneqq n^{-1} \sum \limits_{i = 1}^n \tau_i = \ybar{1} - \ybar{0},
+\end{equation*}
+which is likewise a fixed (though unknown) quantity. Define the Difference-in-Means estimator of $\tauS$ under complete random assignment as
+\begin{equation}
+\label{eq: diff means est I SATE}
+\tauhat \coloneqq \dfrac{1}{n_T} \sum \limits_{i = 1}^n Z_i Y_i - \dfrac{1}{n_C} \sum \limits_{i = 1}^n \left(1 - Z_i\right) Y_i.
+\end{equation}
+The estimator in \Cref{eq: diff means est I SATE} is the same Difference-in-Means estimator whose unbiasedness the companion guide establishes. Under complete random assignment, where the design fixes the counts $n_T(\bZ) = n_T$ and $n_C(\bZ) = n_C$, the estimator coincides with the ratio form $(\sum_i Z_i Y_i) / (\sum_i Z_i) - (\sum_i (1 - Z_i) Y_i) / (\sum_i (1 - Z_i))$. Unlike the estimand $\tauS$, the estimator $\tauhat$ is a \textit{random variable}, since it is a function of the random assignment vector $\bZ$ and inherits all of its randomness from $\bZ$. For the expectation and variance of $\tauhat$ in \Cref{eq: diff means est I SATE}, I write $\EZ[\cdot]$ and $\VarZ[\cdot]$ to emphasize that they are taken over only the randomness of the assignment process, i.e., over the distribution of $\bZ$ on $\Omega$.
+
+\subsection{Derivation of variance of Difference-in-Means estimator for the SATE}
+
+\begin{prop}
+\label{prop: var est SATE}
+The variance of $\tauhat$ for the $\tauS$ under complete random assignment is 
+\small
+\begin{equation}
+\VarZ\left[\tauhat\right] = \dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} - \dfrac{\Ssq{\bm{\tau}}}{n},
+\end{equation}
+\normalsize
+where 
+\small
+\begin{align}
+\Ssq{\pov{1}} = & \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)^2 \label{eq: fin sample var treated} \\
+\Ssq{\pov{0}} = & \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^n \left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right)^2 \label{eq: fin sample var control} \\
+\Ssq{\bm{\tau}} = & \left(\frac{1}{n - 1}\right)\sum \limits_{i = 1}^n \left(\tau_{i} - \dfrac{1}{n} \sum \limits_{i = 1}^n \tau_i\right)^2. \label{eq: fin sample cov}
+\end{align}
+\normalsize
+\end{prop}
+
+\begin{proof}
+Building on \citet[][Chapter 6, Appendix A]{imbensrubin2015}, we will break the proof into several steps:
+
+\textbf{Step 1}: We will show that we can rewrite the Difference-in-Means estimator in \eqref{eq: diff means est I SATE} in terms of \textit{not} the raw assignment indicators $Z_i$, but the centered treatment variable $A_i \coloneqq Z_i - \EZ[Z_i]$. We center because the variance measures the fluctuations of $\tauhat$ around its mean, $\tauS$. If we can algebraically separate $\tauhat$ into a fixed part (equal to $\tauS$) plus a random part with mean zero, then the variance of $\tauhat$ equals the variance of the random part alone. Centering the assignment variable produces this separation and, because $\EZ[A_i] = 0$, greatly simplifies the algebra that follows.
+
+\textbf{Step 2}: The potential outcomes, $\{\po{i}{1}, \po{i}{0}\}_{i = 1}^n$, are fixed, and the observed outcomes inherit their randomness only from the treatment assignment. Once $\tauhat$ is written as a weighted sum of the $A_i$, its variance depends only on the first and second moments of the $A_i$. We will therefore derive $\EZ[A_i]$, $\VarZ[A_i]$ and $\Cov[A_i, A_j]$ for $i \neq j$. The covariance term is essential and nonzero. Under complete random assignment the total number of treated units is fixed at $n_T$, so if one unit is pulled into treatment another must be pulled out. This mechanical dependence among the assignment indicators is the source of the covariance term, and we will see that the covariance is negative.
+
+\textbf{Step 3}: We will rely on the expressions for $\Ssq{\pov{1}}$ and $\Ssq{\pov{0}}$ above, as well as on the following algebraic equivalence that we will need to prove:
+\small
+\begin{equation}
+\Ssq{\bm{\tau}} = \Ssq{\pov{1}} + \Ssq{\pov{0}} - \dfrac{2}{n - 1} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)\left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right).
+\end{equation}
+\normalsize
+
+\textbf{Step 4:} Once we have completed the three previous steps, we will rely only on the linearity of expectations, rules of variance and (often very messy) algebra.
+
+\subsubsection*{Step 1}
+
+First, we can re-write the estimator as 
+\small
+\begin{align*}
+\dfrac{1}{n_T} \sum \limits_{i = 1}^n Z_i Y_i - \dfrac{1}{n_C} \sum \limits_{i = 1}^n \left(1 - Z_i\right) Y_i & = \dfrac{1}{n} \sum \limits_{i = 1}^n \left(\dfrac{n}{n_T} Z_i \po{i}{1} - \dfrac{n}{n_C}\left(1 - Z_i\right) \po{i}{0}\right)
+\end{align*}
+\normalsize
+
+Because $n = n_C + n_T$, we have $1 = \frac{n_C + n_T}{n}$, so instead of $(1 - Z_i)$ we can write $(\frac{n_C + n_T}{n} - Z_i)$:
+\small
+\begin{equation*}
+\dfrac{1}{n} \sum \limits_{i = 1}^n \dfrac{n}{n_T} Z_i \po{i}{1} - \dfrac{n}{n_C}\left(\dfrac{n_C + n_T}{n} - Z_i\right) \po{i}{0},
+\end{equation*}
+\normalsize
+which after a little bit of algebra yields
+\small
+\begin{equation}
+\label{eq: diff means est II SATE}
+\dfrac{1}{n} \sum \limits_{i = 1}^n \dfrac{n}{n_T} \left(\underbrace{Z_i - \dfrac{n_T}{n}}_{= A_i} + \dfrac{n_T}{n}\right) \po{i}{1} - \dfrac{n}{n_C}\left[\dfrac{n_C}{n} - \left(\underbrace{Z_i - \dfrac{n_T}{n}}_{= A_i}\right)\right] \po{i}{0},
+\end{equation}
+\normalsize
+where $A_i$ is the centered treatment variable, $A_i = Z_i - \EZ[Z_i]$, because, under complete random assignment, $\EZ[Z_i] = \frac{n_T}{n}$.
+
+Therefore, we can re-write \eqref{eq: diff means est II SATE} as
+\small
+\begin{equation*}
+\dfrac{1}{n} \sum \limits_{i = 1}^n \dfrac{n}{n_T} \left(A_i + \dfrac{n_T}{n}\right) \po{i}{1} - \dfrac{n}{n_C}\left(\dfrac{n_C}{n} - A_i\right) \po{i}{0},
+\end{equation*}
+\normalsize
+which, with a bit more algebra, is equivalent to
+\small
+\begin{align*}
+\underbrace{\dfrac{1}{n} \sum \limits_{i = 1}^n \left(\po{i}{1} - \po{i}{0}\right)}_{= \, \tauS} + \dfrac{1}{n} \sum \limits_{i = 1}^n A_i \left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right) & = \tauS + \dfrac{1}{n} \sum \limits_{i = 1}^n A_i \left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right)
+\end{align*}
+\normalsize
+
+\subsubsection*{Step 2}
+
+Thus far, we have shown that the Difference-in-Means estimator in \eqref{eq: diff means est I SATE} is equivalent to 
+\small
+\begin{equation}
+\label{eq: diff means est III SATE}
+\tauS + \dfrac{1}{n} \sum \limits_{i = 1}^n A_i \left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right),
+\end{equation}
+\normalsize
+in which $\tauS$, $n_C$, $n_T$, $n$, and $\{\po{i}{0}, \po{i}{1}\}_{i = 1}^n$ are all fixed quantities. The only random quantities in \eqref{eq: diff means est III SATE} are $\{A_i\}_{i = 1}^n$.
+
+Therefore, to derive the variance of \eqref{eq: diff means est III SATE}, we now need to derive $\EZ[A_i]$, $\VarZ[A_i]$ and $\EZ[A_i A_j]$ for $i \neq j$.
+
+To do so, we write the sample space of $A_i$:
+\small
+\begin{equation}
+A_i = Z_i - \dfrac{n_T}{n} = 
+\begin{cases}
+\dfrac{n_C}{n} & \text{if } Z_i = 1 \\ 
+-\dfrac{n_T}{n} & \text{if } Z_i = 0
+\end{cases}
+\end{equation}
+\normalsize
+and recall that, under complete random assignment, $\Pr_{\Omega}(Z_i = 1) = \frac{n_T}{n}$ and $\Pr_{\Omega}(Z_i = 0) = 1 - \frac{n_T}{n} = \frac{n}{n} - \frac{n_T}{n} = \frac{n - n_T}{n} = \frac{n_C}{n}$. 
+
+\paragraph*{Derivation of $\EZ[A_i]$:} It is straightforward to see that $\EZ[A_i] = \EZ[Z_i - \frac{n_T}{n}] = \EZ[Z_i] - \frac{n_T}{n} = \frac{n_T}{n} - \frac{n_T}{n} = 0$ or, equivalently,
+\small
+\begin{align*}
+\EZ\left[A_i\right] & = \dfrac{n_C}{n}\Pr_{\Omega}\left(Z_i = 1\right) - \dfrac{n_T}{n} \Pr_{\Omega}\left(Z_i = 0\right)  \\[1ex]
+& = \dfrac{n_C}{n}\dfrac{n_T}{n} - \dfrac{n_T}{n} \left(1 - \dfrac{n_T}{n}\right) \\[1ex]
+& = \dfrac{n_C}{n}\dfrac{n_T}{n} - \dfrac{n_T}{n} \dfrac{n_C}{n} \\[1ex] 
+& = 0.
+\end{align*}
+\normalsize
+
+\paragraph*{Derivation of $\VarZ[A_i]$:} Since $\EZ[A_i] = 0$, the variance reduces to $\VarZ[A_i] = \EZ[A_i^2] - \EZ[A_i]^2 = \EZ[A_i^2]$. Thus,
+\small
+\begin{align*}
+\VarZ\left[A_i\right] & = \EZ\left[A_i^2\right] \\[1ex]
+& = \left(\dfrac{n_C}{n}\right)^2 \Pr_{\Omega}\left(Z_i = 1\right) + \left(-\dfrac{n_T}{n}\right)^2 \Pr_{\Omega}\left(Z_i = 0\right) \\[1ex]
+& = \dfrac{n_C^2}{n^2} \Pr_{\Omega}\left(Z_i = 1\right) + \dfrac{n_T^2}{n^2} \Pr_{\Omega}\left(Z_i = 0\right) \\[1ex]
+& = \dfrac{n_C^2}{n^2} \dfrac{n_T}{n} + \dfrac{n_T^2}{n^2} \dfrac{n_C}{n} \\[1ex]
+& = \dfrac{n_C^2 n_T}{n^3} + \dfrac{n_T^2 n_C}{n^3} \\[1ex]
+& = \dfrac{n_C^2 n_T + n_T^2 n_C}{n^3} \\[1ex]
+& = \dfrac{n_C n_T\left(n_C + n_T\right)}{n^3} \\[1ex]
+& = \dfrac{n_C n_T\left(n\right)}{n^3} \\[1ex]
+& = \dfrac{n_C n_T}{n^2}.
+\end{align*}
+\normalsize
+
+\paragraph*{Derivation of $\Cov[A_i, A_j]$ for $i \neq j$:} The $\{A_i\}_{i = 1}^n$ all have the same expected value, $\EZ[A_i] = 0$ (as we just showed), but they are \textit{not} independent: Fixing the count $n_T(\bZ)$ at $n_T$ links the assignment indicators to one another. We therefore will need to derive $\Cov[A_i, A_j]$ for $i \neq j$. To do so, first note that
+\small
+\begin{align*}
+\Cov\left[A_i, A_j\right] & = \EZ\left[\left(A_i - \EZ\left[A_i\right]\right)\left(A_j - \EZ\left[A_j\right]\right)\right] \\[1ex]
+& = \EZ\left[\left(A_i - 0\right)\left(A_j - 0\right)\right] \\[1ex]
+& = \EZ\left[A_i A_j\right],
+\end{align*}
+\normalsize
+which is easier to work with.
+
+The possible values that $A_i A_j$ could take on are 
+\small
+\begin{equation*}
+A_i A_j = 
+\begin{cases}
+\left(\dfrac{n_C}{n}\right) \left(\dfrac{n_C}{n}\right) = \dfrac{n_C^2}{n^2} & \text{if } Z_i = 1 \text{ and } Z_j = 1 \\[1ex]
+\left(-\dfrac{n_T}{n}\right) \left(\dfrac{n_C}{n}\right) = \dfrac{-n_T n_C}{n^2} & \text{if } Z_i = 0 \text{ and } Z_j = 1 \text{ or } Z_i = 1 \text{ and } Z_j = 0 \\[1ex] 
+\left(-\dfrac{n_T}{n}\right) \left(-\dfrac{n_T}{n}\right) = \dfrac{n_T^2}{n^2} & \text{if } Z_i = 0 \text{ and } Z_j = 0.
+\end{cases}
+\end{equation*}
+\normalsize
+Having derived the sample space of $A_i A_j$, we now need to derive the probabilities that correspond to each of the events in that sample space, namely, $\Pr_{\Omega}(Z_i = 1, Z_j = 1)$, $\Pr_{\Omega}(Z_i = 0, Z_j = 1)$, $\Pr_{\Omega}(Z_i = 1, Z_j = 0)$ and $\Pr_{\Omega}(Z_i = 0, Z_j = 0)$.
+
+Remember that $Z_i$ and $Z_j$ are \textit{not} independent, which implies that, e.g., $\Pr_{\Omega}(Z_i = 1, Z_j = 1) \neq \Pr_{\Omega}(Z_i = 1) \Pr_{\Omega}(Z_j = 1)$. Instead, we will appeal to the definition of joint probability in which $\Pr_{\Omega}(Z_i = z, Z_j = z^{\prime}) = \Pr_{\Omega}(Z_i = z)\Pr_{\Omega}(Z_j = z^{\prime} \given Z_i = z)$:
+\small
+\begin{equation*}
+\Pr_{\Omega}\left(Z_i = z, Z_j = z^{\prime}\right) = 
+\begin{cases}
+\left(\dfrac{n_T}{n}\right)\left(\dfrac{n_T - 1}{n - 1}\right) & \text{ if } Z_i = 1 \text{ and } Z_j = 1 \\[1ex]
+\left(\dfrac{n_T}{n}\right)\left(\dfrac{n_C}{n - 1}\right) & \text{ if } Z_i = 1 \text{ and } Z_j = 0 \\[1ex]
+\left(\dfrac{n_C}{n}\right)\left(\dfrac{n_T}{n - 1}\right) & \text{ if } Z_i = 0 \text{ and } Z_j = 1 \\[1ex]
+\left(\dfrac{n_C}{n}\right)\left(\dfrac{n_C}{n - 1}\right) & \text{ if } Z_i = 0 \text{ and } Z_j = 0. 
+\end{cases}
+\end{equation*}
+\normalsize
+
+We can therefore write the probability mass function (PMF) of $A_i A_j$ as 
+\small
+\begin{equation*}
+\Pr_{\Omega}\left(A_i A_j\right) = 
+\begin{cases}
+\left(\dfrac{n_T}{n}\right)\left(\dfrac{n_T - 1}{n - 1}\right) = \dfrac{n_T\left(n_T - 1\right)}{n\left(n - 1\right)}  & \text{ if } A_i A_j = \dfrac{n_C^2}{n^2} \\[1ex]
+\left(\dfrac{n_T}{n}\right)\left(\dfrac{n_C}{n - 1}\right) + \left(\dfrac{n_C}{n}\right)\left(\dfrac{n_T}{n - 1}\right) = \dfrac{2\left(n_T n_C\right)}{n\left(n - 1\right)} & \text{ if } A_i A_j = \dfrac{-n_T n_C}{n^2} \\[1ex]
+\left(\dfrac{n_C}{n}\right)\left(\dfrac{n_C}{n - 1}\right) = \dfrac{n_C\left(n_C - 1\right)}{n\left(n - 1\right)} & \text{ if } A_i A_j = \dfrac{n_T^2}{n^2},
+\end{cases}
+\end{equation*}
+\normalsize
+which implies that
+\small
+\begin{align*}
+\EZ\left[A_i A_j\right] & = \dfrac{n_C^2}{n^2} \left(\dfrac{n_T\left(n_T - 1\right)}{n\left(n - 1\right)}\right) + \dfrac{-n_T n_C}{n^2} \left(\dfrac{2\left(n_T n_C\right)}{n\left(n - 1\right)}\right) + \dfrac{n_T^2}{n^2} \left(\dfrac{n_C\left(n_C - 1\right)}{n\left(n - 1\right)}\right)
+\end{align*}
+\normalsize
+or equivalently, after some algebra, 
+\small
+\begin{equation*}
+\dfrac{-n_T n_C}{n^2\left(n - 1\right)}.
+\end{equation*}
+\normalsize
+
+\subsubsection*{Step 3}
+
+In this step, we will prove the algebraic equivalence between the expression for $\Ssq{\bm{\tau}}$ in Equation \eqref{eq: fin sample cov} above and
+\small
+\begin{equation}
+\label{eq: fin sample cov II}
+\Ssq{\bm{\tau}} = \Ssq{\pov{1}} + \Ssq{\pov{0}} - \dfrac{2}{n - 1} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)\left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right),
+\end{equation}
+\normalsize
+which will be valuable for our derivation of $\VarZ[\tauhat]$ in \textbf{Step 4} to follow.
+
+Recall from Equation \eqref{eq: fin sample cov} that
+\small
+\begin{equation*}
+\Ssq{\bm{\tau}} = \dfrac{1}{n - 1} \sum \limits_{i = 1}^n \left(\tau_i - \dfrac{1}{n} \sum \limits_{i = 1}^n \tau_i\right)^2.
+\end{equation*}
+\normalsize
+Hence, 
+\small
+\begin{align*}
+\Ssq{\bm{\tau}} & = \dfrac{1}{n - 1} \sum \limits_{i = 1}^n \left(\tau_i - \dfrac{1}{n} \sum \limits_{i = 1}^n \tau_i\right)^2 \\[1ex]
+& = \dfrac{1}{n - 1} \sum \limits_{i = 1}^n \left(\underbrace{\left(\po{i}{1} - \po{i}{0}\right)}_{=\tau_i} - \dfrac{1}{n} \sum \limits_{i = 1}^n \underbrace{\left(\po{i}{1} - \po{i}{0}\right)}_{= \tau_i}\right)^2 \\
+& = \dfrac{1}{n - 1} \sum \limits_{i = 1}^n \left(\left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right) - \left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right)\right)^2,
+\end{align*}
+\normalsize
+where, in the last line, we have used $\frac{1}{n}\sum_{i = 1}^n(\po{i}{1} - \po{i}{0}) = \frac{1}{n}\sum_{i = 1}^n \po{i}{1} - \frac{1}{n}\sum_{i = 1}^n \po{i}{0}$ to regroup each summand into a treated deviation, $(\po{i}{1} - \frac{1}{n}\sum_{i = 1}^n \po{i}{1})$, minus a control deviation, $(\po{i}{0} - \frac{1}{n}\sum_{i = 1}^n \po{i}{0})$. Expanding the square via $(a - b)^2 = a^2 - 2ab + b^2$ and then distributing the sum, this is equivalent to
+\small
+\begin{align*}
+\Ssq{\bm{\tau}} & = \underbrace{\dfrac{1}{n - 1} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)^2}_{= \Ssq{\pov{1}}} + \underbrace{\dfrac{1}{n - 1} \sum \limits_{i = 1}^n \left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right)^2}_{= \Ssq{\pov{0}}} \\ 
+& - \dfrac{2}{n - 1} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)\left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right) \\[1ex]
+& = \Ssq{\pov{1}} + \Ssq{\pov{0}} - \dfrac{2}{n - 1} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)\left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right).
+\end{align*}
+\normalsize
+
+\subsubsection*{Step 4}
+
+To complete the derivation, we compute the variance of the Difference-in-Means estimator from the expression in \eqref{eq: diff means est III SATE}:
+\small
+\begin{align*}
+\VarZ\left[\tauhat\right] & = \VarZ\left[\tauS + \dfrac{1}{n} \sum \limits_{i = 1}^n A_i \left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right)\right] \\[1ex]
+& = \dfrac{1}{n^2}\VarZ\left[\sum \limits_{i = 1}^n A_i \underbrace{\left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right)}_{\text{constant}}\right],
+\end{align*}
+\normalsize
+which, since $\EZ[A_i] = 0$, is equivalent to
+\small
+\begin{align*}
+\VarZ\left[\tauhat\right] & = \dfrac{1}{n^2} \left(\EZ\left[\left(\sum \limits_{i = 1}^n A_i \underbrace{\left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right)}_{\text{constant}}\right)^2\right] - \EZ\left[\sum \limits_{i = 1}^n A_i \underbrace{\left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right)}_{\text{constant}}\right]^2\right) \\[1ex]
+& = \dfrac{1}{n^2} \EZ\left[\left(\sum \limits_{i = 1}^n A_i \left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right)\right)^2\right].
+\end{align*}
+\normalsize
+Expanding the expression immediately above yields
+\small
+\begin{align*}
+\VarZ\left[\tauhat\right] & = \dfrac{1}{n^2} \EZ\left[\left(\sum \limits_{i = 1}^n A_i \left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right)\right)^2\right] \\[1ex]
+& = \dfrac{1}{n^2} \EZ\left[\left(\sum \limits_{i = 1}^n A_i \left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right)\right) \left(\sum \limits_{j = 1}^n A_j \left(\dfrac{n}{n_T} \po{j}{1} + \dfrac{n}{n_C} \po{j}{0}\right)\right)\right] \\[1ex]
+& = \dfrac{1}{n^2} \EZ\left[\sum \limits_{i = 1}^n \sum \limits_{j = 1}^n A_i A_j\left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right)\left(\dfrac{n}{n_T} \po{j}{1} + \dfrac{n}{n_C} \po{j}{0}\right)\right].
+\end{align*}
+\normalsize
+In \textbf{Step 2} above, we showed that 
+\small
+\begin{equation*}
+\begin{cases}
+\EZ\left[A_iA_j\right] = \dfrac{-n_T n_C}{n^2\left(n - 1\right)} & \text{ when } i \neq j \\[1ex]
+\EZ\left[A_iA_j\right] = \EZ\left[A_i^2\right] = \VarZ\left[A_i\right] = \dfrac{n_C n_T}{n^2} & \text{ when } i = j, 
+\end{cases}
+\end{equation*}
+\normalsize
+we now split the double sum $\sum_{i = 1}^n \sum_{j = 1}^n$ into the $n$ diagonal terms (where $i = j$, so that $A_i A_j = A_i^2$) and the $n(n - 1)$ off-diagonal terms (where $i \neq j$), because $\EZ[A_i A_j]$ takes a different value in each case. The split yields
+\small
+\begin{align*}
+\VarZ\left[\tauhat\right] & = \dfrac{1}{n^2} \Bigg(\sum \limits_{i = 1}^n \left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right)^2\underbrace{\EZ\left[A_i^2\right]}_{= \dfrac{n_C n_T}{n^2}} \\
+& \qquad\qquad + \sum \limits_{i = 1}^n \sum \limits_{j \neq i} \left(\dfrac{n}{n_T} \po{i}{1} + \dfrac{n}{n_C} \po{i}{0}\right)\left(\dfrac{n}{n_T} \po{j}{1} + \dfrac{n}{n_C} \po{j}{0}\right)\underbrace{\EZ\left[A_i A_j\right]}_{= \dfrac{-n_T n_C}{n^2\left(n - 1\right)}}\Bigg).
+\end{align*}
+\normalsize
+
+We now substitute the expressions we derived for $\EZ[A_i^2]$ and $\EZ[A_i A_j]$. To keep the bookkeeping manageable, we abbreviate the constant weight multiplying $A_i$ as $w_i \coloneqq \frac{n}{n_T} \po{i}{1} + \frac{n}{n_C} \po{i}{0}$, so that the expression above becomes
+\small
+\begin{align*}
+\VarZ\left[\tauhat\right] & = \dfrac{1}{n^2}\left(\dfrac{n_C n_T}{n^2}\sum \limits_{i = 1}^n w_i^2 - \dfrac{n_T n_C}{n^2 \left(n - 1\right)}\sum \limits_{i = 1}^n \sum \limits_{j \neq i} w_i w_j\right).
+\end{align*}
+\normalsize
+Using the identity $\sum_{i = 1}^n \sum_{j \neq i} w_i w_j = (\sum_{i = 1}^n w_i)^2 - \sum_{i = 1}^n w_i^2$ and then collecting terms over the common denominator $n - 1$,
+\small
+\begin{align*}
+\VarZ\left[\tauhat\right] & = \dfrac{n_C n_T}{n^4 \left(n - 1\right)}\left(n\sum \limits_{i = 1}^n w_i^2 - \left(\sum \limits_{i = 1}^n w_i\right)^2\right) = \dfrac{n_C n_T}{n^3 \left(n - 1\right)}\sum \limits_{i = 1}^n \left(w_i - \bar{w}\right)^2,
+\end{align*}
+\normalsize
+where $\bar{w} = \frac{1}{n}\sum_{i = 1}^n w_i$, and where the final equality uses the identity $n\sum_i w_i^2 - (\sum_i w_i)^2 = n\sum_i (w_i - \bar{w})^2$. Finally, we substitute back the centered weight,
+\begin{equation*}
+w_i - \bar{w} = \dfrac{n}{n_T}\left(\po{i}{1} - \frac{1}{n}\sum_{i = 1}^n \po{i}{1}\right) + \dfrac{n}{n_C}\left(\po{i}{0} - \frac{1}{n}\sum_{i = 1}^n \po{i}{0}\right),
+\end{equation*}
+and expanding the square yields
+\small
+\begin{equation} \label{eq: var subst A}
+\begin{split}
+\VarZ\left[\tauhat\right] & = \dfrac{n_C}{n n_T \left(n - 1\right)} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)^2 + \dfrac{n_T}{n n_C \left(n - 1\right)} \sum \limits_{i = 1}^n \left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right)^2 \\ 
+& + \dfrac{2}{n \left(n - 1\right)} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)\left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right).
+\end{split}
+\end{equation}
+\normalsize
+Now recall that
+\small
+\begin{align*}
+\Ssq{\pov{1}} & = \dfrac{1}{n - 1} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)^2 \text{ and }\\[1ex]
+\Ssq{\pov{0}} & = \dfrac{1}{n - 1} \sum \limits_{i = 1}^n \left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right)^2,
+\end{align*}
+\normalsize
+which yields
+\small
+\begin{equation*}
+\VarZ\left[\tauhat\right] = \dfrac{n_C}{n n_T} \Ssq{\pov{1}} + \dfrac{n_T}{n n_C} \Ssq{\pov{0}} + \dfrac{2}{n \left(n - 1\right)} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)\left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right).
+\end{equation*}
+\normalsize
+Finally, at long last, it follows that
+\small
+\begin{align*}
+\VarZ\left[\tauhat\right] & = \dfrac{n_C}{n n_T} \Ssq{\pov{1}} + \dfrac{n_T}{n n_C} \Ssq{\pov{0}} + \dfrac{2}{n \left(n - 1\right)} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)\left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right) \notag \\[1ex]
+& = \dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} - \dfrac{\Ssq{\pov{1}}}{n} - \dfrac{\Ssq{\pov{0}}}{n} \notag \\
+& \qquad + \dfrac{2}{n \left(n - 1\right)} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)\left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right) \notag \\[1ex]
+& = \dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} \\
+& \qquad - \dfrac{1}{n}\underbrace{\left(\Ssq{\pov{1}} + \Ssq{\pov{0}} - \dfrac{2}{\left(n - 1\right)} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)\left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right)\right)}_{= \Ssq{\bm{\tau}}}.
+\end{align*}
+\normalsize
+As we showed in \textbf{Step 3}, the bracketed term in the expression immediately above is equal to $\Ssq{\bm{\tau}}$, which leaves us with
+\small
+\begin{equation}
+\label{eq: var diff means}
+\dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} - \dfrac{\Ssq{\bm{\tau}}}{n}.
+\end{equation}
+\normalsize
+\end{proof}
+
+Each of the three terms in this variance has a clear meaning. The estimator $\tauhat$ is the difference between the treated group mean and the control group mean, so its variability comes from two pieces. The first term, $\frac{\Ssq{\pov{1}}}{n_T}$, is the variability contributed by the treated mean. It grows with the spread of the treatment potential outcomes, $\Ssq{\pov{1}}$, and shrinks as we average over more treated units, $n_T$. The second term, $\frac{\Ssq{\pov{0}}}{n_C}$, is the analogous variability contributed by the control mean. If the treated and control means were computed on two \textit{independently} drawn groups, these first two terms would account for the entire variance.
+
+The two means are \textit{not} independent, however, and the third term, $-\frac{\Ssq{\bm{\tau}}}{n}$, corrects for the dependence that complete random assignment induces. The treated and control groups are complementary, since every unit assigned to treatment is a unit \textit{withheld} from control, so the treated mean and the control mean are negatively coupled. The coupling runs through the individual treatment effects, which is why the correction involves $\Ssq{\bm{\tau}}$, the finite population variance of the individual effects $\tau_i = \po{i}{1} - \po{i}{0}$. Two consequences follow. First, the correction enters with a minus sign and therefore \textit{lowers} the variance; ignoring the correction would overstate the variance, which is what makes the conservative variance estimator (developed in the next section) conservative rather than anti-conservative. Second, when the treatment effect is constant across units, $\tau_i$ is the same for all $i$, so $\Ssq{\bm{\tau}} = 0$, the correction vanishes, and the spreads of the two sets of potential outcomes fully determine the variance.
+
+The expression we just derived for $\VarZ[\tauhat]$ is the \textit{true} variance of the Difference-in-Means estimator. It is mathematically equivalent to Equation 3.4 in \citet[][57]{gerbergreen2012}, which differs from the expression in \Cref{eq: var diff means} above because the variances and covariance of treated and control potential outcomes in \citet[][Equation 3.4, 57]{gerbergreen2012} use a denominator of $n$ as opposed to $n - 1$ as in Equations \eqref{eq: fin sample var treated}, \eqref{eq: fin sample var control} and \eqref{eq: fin sample cov} above. The corollary below establishes this equivalence.
+
+\begin{cor}
+An equivalent expression for the finite sample variance of the Difference-in-Means estimator under complete random assignment is
+\begin{equation}
+\VarZ\left[\tauhat\right] = \dfrac{1}{n - 1}\left(\dfrac{n_C\ssq{\pov{1}}}{n_T} + \dfrac{n_T \ssq{\pov{0}}}{n_C} + 2 \scov{\pov{0}, \pov{1}}\right),
+\end{equation}
+where
+\begin{align}
+\ssq{\pov{1}} = & \left(\frac{1}{n}\right)\sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)^2 \label{eq: fin pop var treated} \\
+\ssq{\pov{0}} = & \left(\frac{1}{n}\right)\sum \limits_{i = 1}^n \left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right)^2 \label{eq: fin pop var control} \\
+\scov{\pov{0}, \pov{1}} = & \left(\frac{1}{n}\right)\sum \limits_{i = 1}^n \left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right)\left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right). \label{eq: fin pop cov}
+\end{align}
+\end{cor}
+
+\begin{proof}
+Recall the expression for $\VarZ[\tauhat]$ in \Cref{eq: var subst A}:
+\begin{equation*}
+\begin{split}
+\VarZ\left[\tauhat\right] & = \dfrac{n_C}{n n_T \left(n - 1\right)} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)^2 + \dfrac{n_T}{n n_C \left(n - 1\right)} \sum \limits_{i = 1}^n \left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right)^2 \\ 
+& + \dfrac{2}{n \left(n - 1\right)} \sum \limits_{i = 1}^n \left(\po{i}{1} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{1}\right)\left(\po{i}{0} - \dfrac{1}{n} \sum \limits_{i = 1}^n \po{i}{0}\right).
+\end{split}
+\end{equation*}
+Then, appealing to the definitions $\ssq{\pov{1}}$, $\ssq{\pov{0}}$ and $\scov{\pov{0}, \pov{1}}$ above, yields
+\begin{align*}
+\VarZ\left[\tauhat\right] & = \dfrac{n_C}{n_T \left(n - 1\right)} \ssq{\pov{1}} + \dfrac{n_T}{n_C \left(n - 1\right)} \ssq{\pov{0}} + \dfrac{2}{\left(n - 1\right)} \scov{\pov{0}, \pov{1}} \\[1ex]
+& = \dfrac{1}{n - 1}\left(\dfrac{n_C\ssq{\pov{1}}}{n_T} + \dfrac{n_T \ssq{\pov{0}}}{n_C} + 2 \scov{\pov{0}, \pov{1}}\right),
+\end{align*}
+which completes the proof.
+\end{proof}
+
+\section{Conservative estimation of the variance}
+
+Having derived the true variance $\VarZ[\tauhat]$, we now turn to estimating it from the observed data. Absent additional assumptions, we \textit{cannot} estimate $\VarZ[\tauhat]$ unbiasedly. The obstruction is the same in both equivalent expressions for the variance. Each expression depends on a quantity that couples a unit's two potential outcomes, namely the covariance $\scov{\pov{0}, \pov{1}}$ in the Gerber--Green form or the variance of the individual effects, $\Ssq{\bm{\tau}}$, in the Imbens--Rubin form, and we never observe both potential outcomes for any single unit (the fundamental problem of causal inference). What we \textit{can} do is construct an estimable quantity that is at least as large as the true variance and estimate that quantity instead. The resulting estimator is \textit{conservative}, in the sense that on average it weakly overstates the variance, which yields valid confidence intervals (possibly too wide) rather than overconfident ones.
+
+We establish the upper bound in two ways, starting from each of the two equivalent expressions for the variance. Both routes arrive at the \textit{same} conservative estimator. We first record the two expressions for reference. The Imbens--Rubin form (Proposition \ref{prop: var est SATE}) is
+\begin{equation}
+\label{eq: var IR form}
+\VarZ\left[\tauhat\right] = \dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} - \dfrac{\Ssq{\bm{\tau}}}{n},
+\end{equation}
+and the Gerber--Green form (the Corollary above) is
+\begin{equation}
+\label{eq: var GG form}
+\VarZ\left[\tauhat\right] = \dfrac{1}{n - 1}\left(\dfrac{n_C\ssq{\pov{1}}}{n_T} + \dfrac{n_T \ssq{\pov{0}}}{n_C} + 2 \scov{\pov{0}, \pov{1}}\right).
+\end{equation}
+
+\subsection{Approach 1 (Gerber--Green expression): bounding the covariance}
+
+In \Cref{eq: var GG form}, we can estimate the variances $\ssq{\pov{1}}$ and $\ssq{\pov{0}}$ unbiasedly, but we cannot estimate the covariance $\scov{\pov{0}, \pov{1}}$. The first approach replaces the unestimable covariance with an estimable upper bound. The Cauchy--Schwarz inequality implies that
+\begin{align*}
+\scov{\pov{0}, \pov{1}} & \leq \sqrt{\ssq{\pov{0}} \ssq{\pov{1}}},
+\end{align*}
+and the arithmetic mean--geometric mean (AM--GM) inequality further implies that
+\begin{align*}
+\sqrt{\ssq{\pov{0}} \ssq{\pov{1}}} \leq \dfrac{\ssq{\pov{0}} + \ssq{\pov{1}}}{2}.
+\end{align*}
+Hence $2\scov{\pov{0}, \pov{1}} \leq  \ssq{\pov{0}} +  \ssq{\pov{1}}$. Substituting this bound for the covariance term in \Cref{eq: var GG form}, and then collecting the two terms in each potential outcome's variance, yields a simple upper bound. The key simplification is that pairing the cross term with the matching squared term gives, for example,
+\begin{equation*}
+\dfrac{n_C \, \ssq{\pov{1}}}{n_T} + \ssq{\pov{1}} = \dfrac{n_C + n_T}{n_T}\,\ssq{\pov{1}} = \dfrac{n \, \ssq{\pov{1}}}{n_T},
+\end{equation*}
+and likewise for the control variance. Carrying this out,
+\small
+\begin{align*}
+\VarZ\left[\tauhat\right] & = \dfrac{1}{n - 1}\left(\dfrac{n_C \ssq{\pov{1}}}{n_T} + \dfrac{n_T \ssq{\pov{0}}}{n_C} + 2\scov{\pov{0}, \pov{1}}\right) \\
+& \leq \dfrac{1}{n - 1}\left(\dfrac{n_C \ssq{\pov{1}}}{n_T} + \dfrac{n_T \ssq{\pov{0}}}{n_C} + \ssq{\pov{1}} + \ssq{\pov{0}}\right) \\
+& = \dfrac{1}{n - 1}\left(\underbrace{\dfrac{n_C \ssq{\pov{1}}}{n_T} + \ssq{\pov{1}}}_{= \, n \ssq{\pov{1}}/n_T} + \underbrace{\dfrac{n_T \ssq{\pov{0}}}{n_C} + \ssq{\pov{0}}}_{= \, n \ssq{\pov{0}}/n_C}\right) \\
+& = \dfrac{n}{n - 1}\left(\dfrac{\ssq{\pov{1}}}{n_T} + \dfrac{\ssq{\pov{0}}}{n_C}\right).
+\end{align*}
+\normalsize
+We can estimate the two remaining unknowns, $\ssq{\pov{1}}$ and $\ssq{\pov{0}}$, unbiasedly. Following \citet[][Theorem 2.4]{cochran1977}, unbiased estimators are
+\small
+\begin{align*}
+\ssqhat{\pov{1}} & = \left(\dfrac{n - 1}{n\left(n_T - 1\right)}\right)\sum \limits_{i = 1}^n Z_i \left(Y_i - \dfrac{1}{n_T} \sum \limits_{i = 1}^n Z_i Y_i \right)^2 \\
+\ssqhat{\pov{0}} & = \left(\dfrac{n - 1}{n\left(n_C - 1\right)}\right)\sum \limits_{i = 1}^n (1 - Z_i) \left(Y_i - \dfrac{1}{n_C} \sum \limits_{i = 1}^n (1 - Z_i) Y_i\right)^2.
+\end{align*}
+\normalsize
+These estimators depend only on the \textit{observed} outcomes. The factor $Z_i$ selects the treated units, for which $Y_i = \po{i}{1}$, and $(1 - Z_i)$ selects the control units, for which $Y_i = \po{i}{0}$. The leading factor $\frac{n - 1}{n}$ converts the ordinary sample variance, which is unbiased for $\Ssq{\cdot}$, into an unbiased estimator of $\ssq{\cdot}$, since $\ssq{\cdot} = \frac{n - 1}{n}\Ssq{\cdot}$. Substituting these into the upper bound gives the conservative variance estimator
+\begin{equation} \label{eq: conservative var est}
+\Varhat\left[\tauhat\right] = \dfrac{n}{n - 1}\left(\dfrac{\ssqhat{\pov{1}}}{n_T} + \dfrac{\ssqhat{\pov{0}}}{n_C}\right).
+\end{equation}
+
+\subsection{Approach 2 (Imbens--Rubin expression): dropping the variance of the individual effects}
+
+The second approach starts from \Cref{eq: var IR form} and is more direct. The only term we cannot estimate is $\Ssq{\bm{\tau}}$, the finite population variance of the individual effects, since computing $\Ssq{\bm{\tau}}$ would require knowing both potential outcomes for each unit. Notice that $\Ssq{\bm{\tau}}$ enters with a \textit{minus} sign and is always nonnegative. Therefore
+\begin{equation*}
+\VarZ\left[\tauhat\right] = \dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} - \underbrace{\dfrac{\Ssq{\bm{\tau}}}{n}}_{\geq \, 0} \; \leq \; \dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C}.
+\end{equation*}
+That is, simply \textit{dropping} the nonnegative term we cannot estimate produces an upper bound. The two remaining terms depend on one potential outcome per unit and can be estimated unbiasedly by the corresponding sample variances within each group,
+\small
+\begin{align*}
+\Ssqhat{\pov{1}} & = \left(\frac{1}{n_T - 1}\right) \sum \limits_{i = 1}^n Z_i \left(Y_i - \dfrac{1}{n_T} \sum \limits_{i = 1}^n Z_i Y_i \right)^2 \\
+\Ssqhat{\pov{0}} & = \left(\frac{1}{n_C - 1}\right) \sum \limits_{i = 1}^n (1 - Z_i) \left(Y_i - \dfrac{1}{n_C} \sum \limits_{i = 1}^n (1 - Z_i) Y_i\right)^2,
+\end{align*}
+\normalsize
+which are well defined because $n_T \geq 2$ and $n_C \geq 2$. Substituting these into the upper bound gives the conservative variance estimator
+\begin{equation}
+\label{eq: conserv var est}
+\Varhat\left[\tauhat\right] = \frac{1}{n_T} \Ssqhat{\pov{1}} + \frac{1}{n_C} \Ssqhat{\pov{0}}.
+\end{equation}
+
+\subsection{The two approaches give the same estimator, and how conservative it is}
+
+The two routes produce the \textit{same} estimator. To see the equivalence, recall that $\ssqhat{\pov{1}} = \frac{n - 1}{n}\Ssqhat{\pov{1}}$ (compare the two pairs of estimators above), so that
+\begin{equation*}
+\dfrac{n}{n - 1}\dfrac{\ssqhat{\pov{1}}}{n_T} = \dfrac{n}{n - 1}\cdot\dfrac{n - 1}{n}\cdot\dfrac{\Ssqhat{\pov{1}}}{n_T} = \dfrac{\Ssqhat{\pov{1}}}{n_T},
+\end{equation*}
+and likewise for the control term. Hence \Cref{eq: conservative var est} and \Cref{eq: conserv var est} are identical; bounding the covariance via the Cauchy--Schwarz/AM--GM route and dropping the nonnegative variance of the individual effects are two ways of describing the same approximation.
+
+Finally, the conservative estimator overstates the variance by an amount we can derive exactly. Because $\Ssqhat{\pov{1}}$ and $\Ssqhat{\pov{0}}$ are unbiased for $\Ssq{\pov{1}}$ and $\Ssq{\pov{0}}$,
+\begin{equation*}
+\EZ\left[\Varhat\left[\tauhat\right]\right] = \dfrac{\Ssq{\pov{1}}}{n_T} + \dfrac{\Ssq{\pov{0}}}{n_C} = \VarZ\left[\tauhat\right] + \dfrac{\Ssq{\bm{\tau}}}{n},
+\end{equation*}
+where the last equality uses \Cref{eq: var IR form}. Therefore
+\begin{equation*}
+\EZ\left[\Varhat\left[\tauhat\right]\right] - \VarZ\left[\tauhat\right] = \dfrac{\Ssq{\bm{\tau}}}{n} \geq 0,
+\end{equation*}
+so the estimator's upward bias is exactly $\Ssq{\bm{\tau}}/n$. The estimator is conservative in general, and it is \textit{exactly} unbiased when the individual treatment effects are constant across units, i.e., when $\Ssq{\bm{\tau}} = 0$ (equivalently, when $2\scov{\pov{0}, \pov{1}} = \ssq{\pov{0}} + \ssq{\pov{1}}$, so that the Cauchy--Schwarz/AM--GM bound in Approach 1 holds with equality).
+
+\begin{singlespace}
+\bibliographystyle{chicago}
+\bibliography{references}
+\end{singlespace}
+
+\end{document}

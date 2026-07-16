@@ -1,0 +1,13 @@
+# Build artifacts. The published PDFs are tracked in ../files/, which is what the
+# site links to; keeping a second copy here would duplicate every rebuild in git
+# history. Local copies of the PDFs are still written here for convenience.
+*.pdf
+*.aux
+*.bbl
+*.blg
+*.brf
+*.log
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
