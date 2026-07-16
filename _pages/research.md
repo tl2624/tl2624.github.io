@@ -34,6 +34,8 @@ Leavitt, T., J. Bowers, and L. W. Miratrix. Sequential Sensitivity Analysis for 
 https://doi.org/10.48550/arXiv.2605.21893)
 **ArXiv Preprint**: [PDF](https://tl2624.github.io/files/Leavitt_et_al_2026.pdf)
 
+Leavitt, T. Which Effect of Race? Causal Inference without Holding All Else Equal. Submitted.
+
 ## Book Chapters
 
 Bowers, J. and T. Leavitt (2020). Causality and design-based inference. In L. Curini and R. Franzese (Eds.), The SAGE Handbook of Research Methods in Political Science and International Relations, Volume 2, Chapter 41, pp. 769-804. Thousand Oaks, CA: SAGE Publications. [DOI: 10.4135/9781526486387.n44](https://doi.org/10.4135/9781526486387.n44)  
