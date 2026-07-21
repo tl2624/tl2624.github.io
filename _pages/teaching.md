@@ -20,7 +20,7 @@ author_profile: true
 ## The City College of New York (CCNY), CUNY
 
 - **Political Systems of Africa.** S18.
-  [Syllabus](https://tl2624.github.io/files/PSC_2380.pdf)
+  [Syllabus](https://tl2624.github.io/files/PSC_23800.pdf)
 
 ---
 
