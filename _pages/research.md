@@ -30,11 +30,11 @@ Leavitt, T. Beyond Pre-Trends: A Discordance-Based Sensitivity Analysis for Diff
 
 ## Under Review
 
-Leavitt, T., J. Bowers, and L. W. Miratrix. Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force. Revise and resubmit at *Journal of the American Statistical Association*. [DOI: 10.48550/arXiv.2605.21893](https://doi.org/10.48550/arXiv.2605.21893)  
-**ArXiv Preprint**: [PDF](https://tl2624.github.io/files/Leavitt_et_al_2026.pdf)
+Leavitt, T., J. Bowers, and L. W. Miratrix. Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force. Revise and resubmit at *Journal of the American Statistical Association*. [arXiv:2605.21893](https://arxiv.org/abs/2605.21893)  
+**Preprint**: [PDF](https://tl2624.github.io/files/Leavitt_et_al_2026.pdf)
 
-Leavitt, T. Which Effect of Race? Causal Inference without Holding All Else Equal. Submitted. [DOI: 10.48550/arXiv.2607.16371](https://doi.org/10.48550/arXiv.2607.16371)  
-**ArXiv Preprint**: [PDF](https://tl2624.github.io/files/Leavitt_2026b.pdf)
+Leavitt, T. Which Effect of Race? Causal Inference without Holding All Else Equal. Submitted. [arXiv:2607.16371](https://arxiv.org/abs/2607.16371)  
+**Preprint**: [PDF](https://tl2624.github.io/files/Leavitt_2026b.pdf)
 
 ## Book Chapters
 
