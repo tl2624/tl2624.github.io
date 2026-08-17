@@ -8,7 +8,7 @@ author_profile: true
 ## Doctoral
 
 - **Quantitative Methods 2: Statistical Theory and Causal Inference** (POLS GU4722). Political Science, Columbia University. S27. *Second course in the Ph.D. methods sequence.*
-- **Applied Quantitative Research II** (PSC 85509). Political Science, The Graduate Center, City University of New York (CUNY). F26. *Third course in the Ph.D. methods sequence.*
+- **Applied Quantitative Research II** (PSC 85509). Political Science, The Graduate Center, City University of New York (CUNY). F26. *Third course in the Ph.D. methods sequence.* [Syllabus](https://tl2624.github.io/files/PSC_85509.pdf)
 - **Causal Inference for the Social Sciences**. Inter-university Consortium for Political and Social Research (ICPSR) Summer Program, University of Michigan. Su18–Su24, Su26. [Syllabus](https://tl2624.github.io/files/ICPSR_Causal_Inference.pdf)
 
 ## Master's
