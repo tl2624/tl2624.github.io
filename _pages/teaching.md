@@ -16,7 +16,7 @@ author_profile: true
 *Courses for Master of International Affairs (MIA), Master of Public Administration (MPA), and Certificate in Quantitative Methods for Policy and Equity Analysis students at the Marxe School of Public and International Affairs (Marxe School).*
 
 - **Data Collection and Description** (PAF 9270). Marxe School, Baruch College, CUNY. S27.
-- **Public Affairs Capstone Seminar** (PAF 9190). Marxe School, Baruch College, CUNY. F26.
+- **Public Affairs Capstone Seminar** (PAF 9190). Marxe School, Baruch College, CUNY. F26. [Syllabus](https://tl2624.github.io/files/PAF_9190.pdf)
 - **Advanced Quantitative Methods** (PAF 9177). Marxe School, Baruch College, CUNY. F24, S25. [Syllabus](https://tl2624.github.io/files/PAF_9177.pdf)
 - **Causal Analysis and Inference** (PAF 9272). Marxe School, Baruch College, CUNY. S24, F24, S25. [Syllabus](https://tl2624.github.io/files/PAF_9272.pdf)
 - **Data Analysis for Public Service** (PAF 9271). Marxe School, Baruch College, CUNY. F23, S24.
