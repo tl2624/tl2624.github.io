@@ -10,9 +10,9 @@
 main:
   - title: "CV"
     url: /cv/
-  - title: "Research"
-    url: /research/
-  - title: "Teaching"
-    url: /teaching/
+  - title: "Publications"
+    url: /publications/
+  - title: "Courses"
+    url: /courses/
   - title: "Methods Guides"
     url: /methods-guides/

@@ -1,7 +1,9 @@
 ---
 layout: single
 title: ""
-permalink: /teaching/
+permalink: /courses/
+redirect_from:
+  - /teaching/
 author_profile: true
 ---
 
