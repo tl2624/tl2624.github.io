@@ -28,13 +28,10 @@
   }
 }
 
-/* [Abstract] and [BibTeX] toggles under publication entries.
-   Behavior lives in assets/js/pub-toggle.js. */
-
-/* Keep each bracketed label on one line. */
-.pub-toggle {
-  white-space: nowrap;
-}
+/* Abstract and BibTeX blocks under publication entries, which the Abstract and
+   BibTeX links on an entry's links line show and hide. Behavior lives in
+   assets/js/pub-toggle.js. The links themselves are ordinary links and take
+   the theme's link styling, so nothing here styles them. */
 
 /* Collapsed until toggled. The theme puts the "js" class on <html> from a
    script in <head>, so the blocks are hidden before the page first paints
@@ -56,7 +53,10 @@
   padding-left: 1em;
   border-left: 0.25em solid var(--global-border-color);
   font-size: 0.9em;
-  scroll-margin-top: 6em;   /* without JavaScript a toggle jumps here: clear the fixed masthead */
+  /* Without JavaScript the Abstract and BibTeX links jump to their blocks.
+     Stop well short of the top, so the entry stays in view above the block
+     and clear of the fixed masthead. */
+  scroll-margin-top: 12em;
 }
 
 .page__content .pub-toggle-body p {

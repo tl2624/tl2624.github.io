@@ -13,7 +13,9 @@
     await mermaid.run({querySelector:'code.language-mermaid'});
 </script>
 
-<!-- Support for the [Abstract] and [BibTeX] toggles on the publications page -->
-<script defer src="{{ '/assets/js/pub-toggle.js' | relative_url }}"></script>
+<!-- Support for the Abstract and BibTeX links on the publications page.
+     The query string changes with every build, so a browser never pairs a
+     newly built page with a copy of the script it cached from an older one. -->
+<script defer src="{{ '/assets/js/pub-toggle.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
 <!-- end custom footer snippets -->
