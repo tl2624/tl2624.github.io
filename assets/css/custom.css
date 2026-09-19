@@ -27,3 +27,52 @@
     display: none;
   }
 }
+
+/* [Abstract] and [BibTeX] toggles under publication entries.
+   Behavior lives in assets/js/pub-toggle.js. */
+
+/* Keep each bracketed label on one line. */
+.pub-toggle {
+  white-space: nowrap;
+}
+
+/* Collapsed until toggled. The theme puts the "js" class on <html> from a
+   script in <head>, so the blocks are hidden before the page first paints
+   rather than flashing open. Without JavaScript that class is never set and
+   every block stays visible. */
+.js .pub-toggle-body {
+  display: none;
+}
+
+.js .pub-toggle-body.is-open {
+  display: block;
+}
+
+/* An entry's paragraph ends with a 1.3em gap. Pull the block up into that gap
+   so it reads as part of its entry, and mark it off with a rule down the left
+   so an open abstract is not mistaken for the next citation. */
+.page__content .pub-toggle-body {
+  margin: -0.65em 0 1.3em;
+  padding-left: 1em;
+  border-left: 0.25em solid var(--global-border-color);
+  font-size: 0.9em;
+  scroll-margin-top: 6em;   /* without JavaScript a toggle jumps here: clear the fixed masthead */
+}
+
+.page__content .pub-toggle-body p {
+  margin: 0;
+  font-size: 1em;
+}
+
+.page__content .pub-toggle-body pre {
+  margin: 0;
+  padding: 0.75em 1em;
+  font-size: 0.85em;
+  line-height: 1.5;
+  color: var(--global-code-text-color);
+  background: var(--global-code-background-color);
+  border: 1px solid var(--global-border-color);
+  border-radius: 4px;
+  overflow-x: auto;   /* a long BibTeX line scrolls inside the box, not the page */
+  white-space: pre;
+}
