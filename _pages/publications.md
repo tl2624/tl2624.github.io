@@ -156,12 +156,14 @@ Leavitt, T., J. Bowers, and L. W. Miratrix. Sequential Sensitivity Analysis for 
 Inferring racial discrimination in police use of force — the average causal effect of civilian race on use of force — requires two assumptions about policing prior to potential use of force: that officers do not discriminate in whom they would stop (no discrimination in stops) and that, conditional on patrol context, the probability that an encounter is with a minority rather than a white civilian does not vary across encounters (no bias in encounters). As Knox et al. (2020) show, violations of the first can mask racial disparity in force. Whether it reflects discrimination in force also depends on the second. Existing sensitivity analyses address one assumption at a time. We develop a framework that varies both sequentially and apply it to NYPD Stop, Question, and Frisk data (2003–2013). Under plausible levels of discrimination in stops, we find substantial racial disparity in force. However, the conclusion that this disparity reflects discrimination is fragile to modest departures from no bias in encounters that census-based calibration suggests are demographically feasible. By jointly addressing both confounding channels, the framework reveals how they interact in ways that separate analyses cannot, contributing to understanding what generates racial disparities and how they might be addressed.
 </div>
 
+{% comment %}
 Leavitt, T. Which Effect of Race? Causal Inference without Holding All Else Equal. Submitted. [arXiv:2607.16371](https://arxiv.org/abs/2607.16371)  
 **Preprint**:&nbsp;[PDF](https://tl2624.github.io/files/Leavitt_2026b.pdf) | [Abstract](#abs-leavitt-race)
 
 <div class="pub-toggle-body" id="abs-leavitt-race" markdown="1">
 Empirical studies of racial discrimination vary race while holding nonracial traits fixed, a design the literature defends as what credible inference requires. This defense bundles two claims: which effect of race a study should target, and whether its design can recover that effect. I separate them. The same randomization that secures credible estimation and inference recovers a family of race estimands, from the all-else-equal effect to a within-race effect that lets associated traits vary with race. Every member of that family is causal rather than descriptive, and the choice among members is a claim about what a racial category is — a claim extending to ethnicity, religion, and other identity categories that index associated traits. I derive conditions, weaker than the literature’s, for credible estimation and inference. Reanalyzing a Spanish-language campaign experiment, I find coethnic preference among Hispanic voters under the within-race effect and none under the all-else-equal effect.
 </div>
+{% endcomment %}
 
 ## Book Chapters
 
