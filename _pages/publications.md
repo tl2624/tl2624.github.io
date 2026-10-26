@@ -149,7 +149,7 @@ In the canonical Difference-in-Differences design, the control group’s post-tr
 
 ## Under Review
 
-Leavitt, T., J. Bowers, and L. W. Miratrix. Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force. Revise and resubmit at *Journal of the American Statistical Association*. [arXiv:2605.21893](https://arxiv.org/abs/2605.21893)  
+Leavitt, T., J. Bowers, and L. W. Miratrix. Sequential Sensitivity Analysis for Multiple Assumptions: A Framework for Understanding Racial Disparity in Police Use of Force. Revise and resubmit (second round) at *Journal of the American Statistical Association*. [arXiv:2605.21893](https://arxiv.org/abs/2605.21893)  
 **Preprint**:&nbsp;[PDF](https://tl2624.github.io/files/Leavitt_et_al_2026.pdf) | [Abstract](#abs-leavitt-bowers-miratrix)
 
 <div class="pub-toggle-body" id="abs-leavitt-bowers-miratrix" markdown="1">
